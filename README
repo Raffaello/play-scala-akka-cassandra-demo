@@ -1,3 +1,25 @@
+# [WIP] scala play-akka with cassandra and titan
+
+- scala
+- play framework
+- akka
+- cassandra DB
+- Titan DB
+
+## [WIP] configuration using vagrant and puppet
+
+### [WIP] servers architecture
+
+- 2/3 micro web services running background process
+- 1 web server for display dashboard, could be shared with one akka instance
+- 2 cassandra node running titans
+
+--------------------------
+
+--------------------------
+
+--------------------------
+
 This is your new Play application
 =================================
 

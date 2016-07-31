@@ -71,6 +71,7 @@ Vagrant.configure("2") do |config|
       #   apt-get install -y apache2
 
       web.ssh.insert_key = false
+      web.puppet_install.puppet_version = "4.5.3"
       
       web.vm.provision "puppet" do |puppet|
         puppet.manifests_path = "puppet"
@@ -87,6 +88,7 @@ Vagrant.configure("2") do |config|
     end
     
     db.ssh.insert_key = false
+    db.puppet_install.puppet_version = "4.5.3"
     
     db.vm.provision "puppet" do |puppet|
         puppet.manifests_path = "puppet"

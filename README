@@ -15,7 +15,11 @@
 - vagrant-puppet-install plugin
 - VirtualBox 5.1
 
-### [WIP] servers architecture
+### Puppet
+
+- Puppet 4.5.3
+
+## [WIP] servers architecture
 
 - 2/3 micro web services running background processes
 - 1 web server for display dashboard, could be shared with one akka instance

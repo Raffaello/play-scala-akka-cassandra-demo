@@ -69,7 +69,9 @@ Vagrant.configure("2") do |config|
       # config.vm.provision "shell", inline: <<-SHELL
       #   apt-get update
       #   apt-get install -y apache2
-      # SHELL
+
+      web.ssh.insert_key = false
+      
       web.vm.provision "puppet" do |puppet|
         puppet.manifests_path = "puppet"
         puppet.manifest_file = "web-vm.pp"
@@ -83,6 +85,8 @@ Vagrant.configure("2") do |config|
       vb.gui = false
       vb.memory = "256"
     end
+    
+    db.ssh.insert_key = false
     
     db.vm.provision "puppet" do |puppet|
         puppet.manifests_path = "puppet"

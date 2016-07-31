@@ -14,12 +14,12 @@ Vagrant.configure("2") do |config|
 
       # Every Vagrant development environment requires a box. You can search for
       # boxes at https://atlas.hashicorp.com/search.
-      config.vm.box = "centos/7"
+      web.vm.box = "centos/7"
 
       # Disable automatic box update checking. If you disable this, then
       # boxes will only be checked for updates when the user runs
       # `vagrant box outdated`. This is not recommended.
-      config.vm.box_check_update = false
+      web.vm.box_check_update = false
 
       # Create a forwarded port mapping which allows access to a specific port
       # within the machine from a port on the host machine. In the example below,
@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
       # backing providers for Vagrant. These expose provider-specific options.
       # Example for VirtualBox:
       #
-      config.vm.provider "virtualbox" do |vb|
+      web.vm.provider "virtualbox" do |vb|
       #   # Display the VirtualBox GUI when booting the machine
         vb.gui = false
       #
@@ -70,24 +70,23 @@ Vagrant.configure("2") do |config|
       #   apt-get update
       #   apt-get install -y apache2
       # SHELL
-      config.vm.provision "puppet" do |puppet|
+      web.vm.provision "puppet" do |puppet|
         puppet.manifests_path = "puppet"
         puppet.manifest_file = "web-vm.pp"
       end
   end
   
   config.vm.define "db-vm" do |db|
-    config.vm.box = "centos/7"
-    config.vm.box_check_update = false
-    config.vm.provider "virtualbox" do |vb|
+    db.vm.box = "centos/7"
+    db.vm.box_check_update = false
+    db.vm.provider "virtualbox" do |vb|
       vb.gui = false
       vb.memory = "256"
     end
     
-    config.vm.provision "puppet" do |puppet|
+    db.vm.provision "puppet" do |puppet|
         puppet.manifests_path = "puppet"
         puppet.manifest_file = "db-vm.pp"
-    end
+    end 
   end
-    
 end

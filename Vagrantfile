@@ -51,6 +51,7 @@ Vagrant.configure("2") do |config|
       #
       #   # Customize the amount of memory on the VM:
         vb.memory = "256"
+	vb.cpus=1
       end
       #
       # View the documentation for the provider you are using for more
@@ -70,12 +71,20 @@ Vagrant.configure("2") do |config|
       #   apt-get update
       #   apt-get install -y apache2
 
+      web.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+			#group: "www-data", owner:"www-data", 
+			mount_options: ['dmode=775', 'fmode=774'] 
+
       web.ssh.insert_key = false
       web.puppet_install.puppet_version = "4.5.3"
       
       web.vm.provision "puppet" do |puppet|
-        puppet.manifests_path = "puppet"
-        puppet.manifest_file = "web-vm.pp"
+	puppet.environment = 'web'
+	puppet.environment_path = "puppet/environments"
+        #puppet.manifests_path = "puppet/manifests"
+        #puppet.manifest_file = "web-vm.pp"
+	#puppet.modules = "puppet/modules"
+	puppet.options = "--verbose"
       end
   end
   

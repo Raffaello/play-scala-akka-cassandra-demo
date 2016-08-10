@@ -7,7 +7,6 @@ java::oracle { 'jdk8' :
   before => Class['cassandra']
 }
 
-
 class { 'docker':
     version => '1.12.0'
 }

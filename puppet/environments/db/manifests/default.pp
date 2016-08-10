@@ -1,14 +1,10 @@
-#include docker
-#include java
-
-class { 'java':
-  distribution => 'jre',
-}
+include java
 
 java::oracle { 'jdk8' :
   ensure  => 'present',
   version => '8',
-  java_se => 'jre',
+  java_se => 'jdk',
+  before => Class['cassandra']
 }
 
 

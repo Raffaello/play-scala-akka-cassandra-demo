@@ -95,7 +95,11 @@ Vagrant.configure("2") do |config|
       vb.gui = false
       vb.memory = "256"
     end
-    
+	
+    db.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+      			#group: "www-data", owner:"www-data", 
+                        mount_options: ['dmode=775', 'fmode=774']
+ 
     db.ssh.insert_key = false
     db.puppet_install.puppet_version = "4.5.3"
     

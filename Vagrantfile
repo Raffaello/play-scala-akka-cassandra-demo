@@ -100,8 +100,9 @@ Vagrant.configure("2") do |config|
     db.puppet_install.puppet_version = "4.5.3"
     
     db.vm.provision "puppet" do |puppet|
-        puppet.manifests_path = "puppet"
-        puppet.manifest_file = "db-vm.pp"
+	puppet.environment = 'db'
+	puppet.environment_path = 'puppet/environments'
+	puppet.options = "--verbose"
     end 
   end
 end

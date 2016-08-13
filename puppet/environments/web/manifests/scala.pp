@@ -52,6 +52,8 @@ exec { 'download activator':
 ## curl https://bintray.com/sbt/rpm/rpm > bintray-sbt-rpm.repo
 ## sudo mv bintray-sbt-rpm.repo /etc/yum.repos.d/
 ## sudo yum install sbt
+notice("Installing sbt")
+
 exec { 'sbt installer':
   command => '/usr/bin/curl https://bintray.com/sbt/rpm/rpm > bintray-sbt-rpm.repo && \
   mv bintray-sbt-rpm.repo /etc/yum.repos.d/ && \
@@ -66,6 +68,7 @@ exec { 'sbt installer':
 #http://downloads.lightbend.com/scala/2.11.8/scala-2.11.8.tgz
 $scala_version='2.11.8'
 $scala_file = '/tmp/scala.tgz'
+notice("Installing scala version $scala_version")
 exec { 'scala installer' :
   command => "/usr/bin/curl http://downloads.lightbend.com/scala/2.11.8/scala-${scala_version}.tgz > ${scala_file}",
   cwd => '/tmp'

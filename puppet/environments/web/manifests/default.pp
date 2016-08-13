@@ -1,7 +1,4 @@
-exec { "echo 'hello world!!!!'": path => "/usr/bin" }
-
-#include 'docker'
-
+#exec { "echo 'hello world!!!!'": path => "/usr/bin" }
 class { 'docker':
     version => '1.12.0'
 }

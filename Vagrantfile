@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
       #
       #   # Customize the amount of memory on the VM:
         vb.memory = "256"
-	vb.cpus=1
+	    vb.cpus=2
       end
       #
       # View the documentation for the provider you are using for more
@@ -79,12 +79,9 @@ Vagrant.configure("2") do |config|
       web.puppet_install.puppet_version = "4.5.3"
       
       web.vm.provision "puppet" do |puppet|
-	puppet.environment = 'web'
-	puppet.environment_path = "puppet/environments"
-        #puppet.manifests_path = "puppet/manifests"
-        #puppet.manifest_file = "web-vm.pp"
-	#puppet.modules = "puppet/modules"
-	puppet.options = "--verbose"
+	    puppet.environment = 'web'
+	    puppet.environment_path = "puppet/environments"
+        puppet.options = "--verbose"
       end
   end
   
@@ -94,6 +91,7 @@ Vagrant.configure("2") do |config|
     db.vm.provider "virtualbox" do |vb|
       vb.gui = false
       vb.memory = "256"
+      vb.cpus = 2
     end
 	
     db.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",

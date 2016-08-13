@@ -5,7 +5,7 @@ class { 'cassandra::datastax_repo':
   before => Class['cassandra']
 }
 -> class { 'cassandra':
-	authenticator		 => 'PasswordAuthenticator',
+	#authenticator		 => 'PasswordAuthenticator',
 	cluster_name 		=> 'cassandra_cluster',
 	dc			=> 'DC1',
 	endpoint_snitch		=> 'GossipingPropertyFileSnitch',
@@ -17,13 +17,13 @@ class { 'cassandra::datastax_repo':
 	auto_bootstrap		=> false,
 	require => Class['cassandra::datastax_repo', 'java']
 }
--> class { 'cassandra::schema':
-  users => { 'cassandra' => { password => 'cassandra'}},
-  cqlsh_password => 'cassandra',
-  cqlsh_user     => 'cassandra',
-}
--> class { 'cassandra::datastax_agent':
-  stomp_interface => "${::ipaddress}"
-}
--> class { '::cassandra::opscenter': }
-
+#-> class { 'cassandra::schema':
+#  users => { 'cassandra' => { password => 'cassandra'}},
+#  #cqlsh_password => 'cassandra',
+#  #cqlsh_user     => 'cassandra',
+#}
+#-> class { 'cassandra::datastax_agent':
+#  stomp_interface => "${::ipaddress}"
+#}
+#-> class { '::cassandra::opscenter': }
+#

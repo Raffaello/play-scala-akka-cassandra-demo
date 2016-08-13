@@ -1,0 +1,6 @@
+moduledir './modules'
+
+mod 'puppetlabs/archive'
+mod 'puppetlabs/java'
+mod 'puppetlabs/cassandra'
+mod 'puppetlabs/docker'

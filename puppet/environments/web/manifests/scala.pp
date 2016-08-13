@@ -71,7 +71,7 @@ exec { 'scala installer' :
   cwd => '/tmp'
 }
 -> exec{ 'unpack scala':
-  command => "/usr/bin/tar zxvf -o ${scala_file} -C ${install_path}",
+  command => "/usr/bin/tar zxvf ${scala_file} -C ${install_path}",
   cwd => '/tmp',
   user => root,
   unless => "/usr/bin/test ! -f ${scala_file}"

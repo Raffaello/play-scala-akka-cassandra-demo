@@ -36,7 +36,7 @@ exec { 'download activator':
   command     => "/usr/bin/unzip -o ${activator_file} -d ${install_path}",
   cwd         => '/tmp',
   user => root,
-  logoutput => true,
+  #logoutput => true,
   timeout => 0
 }
 -> file { "${install_path}/activator-dist-${activator_version}/bin/activator":

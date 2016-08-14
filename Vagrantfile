@@ -77,7 +77,7 @@ Vagrant.configure("2") do |config|
 
       web.ssh.insert_key = false
       web.puppet_install.puppet_version = "4.5.3"
-      
+      web.vm.hostname = "web.dev"
       web.vm.provision "puppet" do |puppet|
 	    puppet.environment = 'web'
 	    puppet.environment_path = "puppet/environments"

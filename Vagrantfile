@@ -93,7 +93,8 @@ Vagrant.configure("2") do |config|
       vb.memory = "256"
       vb.cpus = 2
     end
-	
+
+	db.vm.network "private_network", ip: "10.10.10.10"
     db.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
       			#group: "www-data", owner:"www-data", 
                         mount_options: ['dmode=775', 'fmode=774']

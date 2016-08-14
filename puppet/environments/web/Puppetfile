@@ -1,0 +1,7 @@
+moduledir './modules'
+
+mod 'puppetlabs/archive'
+mod 'puppetlabs/java'
+mod 'puppetlabs/docker'
+mod 'puppetlabs/patmunge'
+mod 'mtulio/linux'

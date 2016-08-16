@@ -25,6 +25,11 @@
 - 1 web server for display dashboard, could be shared with one akka instance
 - 2 cassandra node running titans
 
+### web-vm
+
+- HAProxy
+
+
 --------------------------
 
 --------------------------

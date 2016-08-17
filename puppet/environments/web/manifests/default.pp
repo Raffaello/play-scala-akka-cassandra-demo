@@ -1,3 +1,10 @@
+#export FACTER_DIST=true
+if $::dist = true {
+
+} else {
+  
+}
+
 #class { 'docker':
 #    version => '1.12.0'
 #}

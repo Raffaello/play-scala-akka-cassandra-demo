@@ -7,5 +7,8 @@ java::oracle { 'jdk8' :
   before => Class['cassandra']
 }
 
-
+package { 'jna':
+  ensure => present,
+  before => Class['cassandra']
+}
 

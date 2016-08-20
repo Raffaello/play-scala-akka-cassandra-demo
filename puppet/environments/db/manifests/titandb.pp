@@ -15,17 +15,20 @@ $titanInstallDir = "/usr/share"
 
 notice("Installing TitanDB version ${titanDbVer}")
 exec { 'titandb installer' :
-  command => "${curl} http://s3.thinkaurelius.com/downloads/titan/titan-${titanDbVer}-hadoop1.zip > $titanZipFile",
+  command => "${curl} http://s3.thinkaurelius.com/downloads/titan/$titanZipFile > $titanZipFile",
   cwd => '/tmp',
-  #unless => 'which titan.sh',
-  path => '/usr/bin'
+  unless => "/usr/bin/test -f /tmp/${titanZipFile}",
+  path => '/usr/bin',
+  logoutput => true,
+  timeout => 0
 }
 -> exec{ 'unpack titandb':
-  command => "/usr/bin/unzip /tmp/${titanZipFile} -C ${titanInstallDir}",
+  command => "/usr/bin/unzip /tmp/${titanZipFile} -d ${titanInstallDir}",
   cwd => '/tmp',
   user => root,
   unless => "/usr/bin/test ! -f /tmp/${titanZipFile}",
-  require => Exec['titandb installer']
+  require => Exec['titandb installer'],
+  timeout => 0
 }
 -> file { "${titanInstallDir}/titan-${titanInstallDir}":
   ensure => 'present',

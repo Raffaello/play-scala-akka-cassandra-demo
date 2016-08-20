@@ -14,7 +14,7 @@ exec { 'yum upgrade':
 }
 
 #class { 'docker':
-#    version => '1.12.0'
+#    version => '1.12.1'
 #}
 
 #docker::image { 'alpine': image_tag => 3.4 }

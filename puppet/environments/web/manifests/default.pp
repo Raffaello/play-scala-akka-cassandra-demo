@@ -9,7 +9,8 @@ exec { 'yum upgrade':
   command => '/usr/bin/yum -y upgrade',
   cwd => '/usr/bin',
   path => '/usr/bin',
-  logoutput => true
+  logoutput => true,
+  timeout => 0
 }
 
 #class { 'docker':

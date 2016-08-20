@@ -22,10 +22,11 @@ package { 'unzip':
 $install_path = '/usr/share'
 $activator_version = '1.3.10'
 $activator_file = '/tmp/activator.zip'
+$curl = "/usr/bin/curl --retry 5 --retry-delay 3"
 #$minimal = '-minimal'
 notice("Installing activator version $activator_version")
 exec { 'download activator':
-  command => "/usr/bin/curl https://downloads.typesafe.com/typesafe-activator/${activator_version}/typesafe-activator-${activator_version}.zip > ${activator_file}",
+  command => "${curl} https://downloads.typesafe.com/typesafe-activator/${activator_version}/typesafe-activator-${activator_version}.zip > ${activator_file}",
   cwd => '/tmp',
   logoutput => true,
   before => Exec['Unpack activator'],
@@ -55,9 +56,9 @@ exec { 'download activator':
 notice("Installing sbt")
 
 exec { 'sbt installer':
-  command => '/usr/bin/curl https://bintray.com/sbt/rpm/rpm > bintray-sbt-rpm.repo && \
+  command => "${curl} https://bintray.com/sbt/rpm/rpm > bintray-sbt-rpm.repo && \
   mv bintray-sbt-rpm.repo /etc/yum.repos.d/ && \
-  /usr/bin/yum install -y sbt',
+  /usr/bin/yum install -y sbt",
   cwd => '/tmp',
   user => root,
   timeout => 0
@@ -70,7 +71,7 @@ $scala_version='2.11.8'
 $scala_file = '/tmp/scala.tgz'
 notice("Installing scala version $scala_version")
 exec { 'scala installer' :
-  command => "/usr/bin/curl http://downloads.lightbend.com/scala/2.11.8/scala-${scala_version}.tgz > ${scala_file}",
+  command => "${curl} http://downloads.lightbend.com/scala/2.11.8/scala-${scala_version}.tgz > ${scala_file}",
   cwd => '/tmp'
 }
 -> exec{ 'unpack scala':

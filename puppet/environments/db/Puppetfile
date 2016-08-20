@@ -1,6 +1,8 @@
-moduledir './modules'
+forge "https://forgeapi.puppetlabs.com"
 
-mod 'puppetlabs/archive'
-mod 'puppetlabs/java'
-mod 'puppetlabs/cassandra'
-mod 'puppetlabs/docker'
+# moduledir './modules'
+
+mod 'puppet-archive',               "1.0.0"
+mod 'puppetlabs-java',              "1.6.0"
+mod 'locp-cassandra',               "1.25.0"
+mod 'puppetlabs-docker_platform',   "2.1.0"

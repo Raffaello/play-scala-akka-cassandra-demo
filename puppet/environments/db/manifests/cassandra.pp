@@ -44,8 +44,8 @@ class { 'cassandra::env':
       match => '#HEAP_NEWSIZE="800M"',
     },
     'JVM_OPTS server.hostname' => {
-      line => 'JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=127.0.0.1',
-      match => 'JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=<public name>'
+      line => 'JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=127.0.0.1"',
+      match => 'JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=<public name>"'
     }
   }
 }

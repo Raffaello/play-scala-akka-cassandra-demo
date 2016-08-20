@@ -1,9 +1,12 @@
-moduledir './modules'
+forge "https://forgeapi.puppetlabs.com"
 
-mod 'puppetlabs/archive'
-mod 'puppetlabs/java'
-mod 'puppetlabs/docker'
-mod 'puppetlabs/patmunge'
-mod 'mtulio/linux'
-mod 'puppetlabs/haproxy'
-mod 'puppet/nodejs'
+# moduledir './modules'
+
+mod 'puppet-archive',               "1.0.0"
+mod 'puppetlabs-java',              "1.6.0"
+mod 'puppetlabs-docker_platform',   "2.1.0"
+mod 'panaman-pathmunge',            "1.0.0"
+mod 'mtulio-linux',                 "1.1.1"
+mod 'puppetlabs-haproxy',           "1.5.0"
+mod 'puppet-nodejs',                "2.0.1"
+

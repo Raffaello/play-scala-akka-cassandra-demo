@@ -8,3 +8,10 @@ haproxy::listen { 'web-haproxy':
   ports     => '8140'
 }
 
+haproxy::balancermember { $fqdn:
+  listening_service => 'web-haproxy',
+  server_names      => $::hostname,
+  ipaddresses       => $::ipaddress,
+  ports             => '8140',
+  options           => 'check'
+}

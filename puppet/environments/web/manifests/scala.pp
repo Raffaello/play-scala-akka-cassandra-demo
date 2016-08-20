@@ -30,7 +30,8 @@ exec { 'download activator':
   cwd => '/tmp',
   logoutput => true,
   before => Exec['Unpack activator'],
-  timeout => 0
+  timeout => 0,
+  unless => 'which activator'
 }
 -> exec { 'Unpack activator' :
   unless => "/usr/bin/test ! -f ${activator_file}",
@@ -38,7 +39,8 @@ exec { 'download activator':
   cwd         => '/tmp',
   user => root,
   #logoutput => true,
-  timeout => 0
+  timeout => 0,
+  require => Exec['download activator']
 }
 -> file { "${install_path}/activator-dist-${activator_version}/bin/activator":
   ensure => 'present',
@@ -72,13 +74,15 @@ $scala_file = '/tmp/scala.tgz'
 notice("Installing scala version $scala_version")
 exec { 'scala installer' :
   command => "${curl} http://downloads.lightbend.com/scala/2.11.8/scala-${scala_version}.tgz > ${scala_file}",
-  cwd => '/tmp'
+  cwd => '/tmp',
+  unless => 'which scala'
 }
 -> exec{ 'unpack scala':
   command => "/usr/bin/tar zxvf ${scala_file} -C ${install_path}",
   cwd => '/tmp',
   user => root,
-  unless => "/usr/bin/test ! -f ${scala_file}"
+  unless => "/usr/bin/test ! -f ${scala_file}",
+  require => Exec['scala installer']
 }
 -> file { "${install_path}/scala-${scala_version}":
   ensure => 'present',

@@ -5,6 +5,13 @@
 #
 #}
 
+exec { 'yum upgrade':
+  command => '/usr/bin/yum -y upgrade',
+  cwd => '/usr/bin',
+  path => '/usr/bin',
+  logoutput => true
+}
+
 #class { 'docker':
 #    version => '1.12.0'
 #}

@@ -1,8 +1,6 @@
 class { 'cassandra::datastax_repo':
+  pkg_url => 'http://rpm.datastax.com/datastax-ddc/3.7',
 	before => Class['cassandra']
-}
--> class {'cassandra::java':
-  before => Class['cassandra']
 }
 -> class { 'cassandra':
 	#authenticator		 => 'PasswordAuthenticator',
@@ -21,7 +19,8 @@ class { 'cassandra::datastax_repo':
   concurrent_counter_writes => 8,
   file_cache_size_in_mb => 8,
   memtable_heap_space_in_mb => 32,
-  memtable_offheap_space_in_mb => 24
+  memtable_offheap_space_in_mb => 24,
+  package_name => 'datastax-ddc'
 }
 #-> class { 'cassandra::schema':
 #  users => { 'cassandra' => { password => 'cassandra'}},

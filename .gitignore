@@ -8,3 +8,5 @@ target
 /RUNNING_PID
 /.vagrant
 *.swp
+.librarian/
+.tmp/

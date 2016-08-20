@@ -21,10 +21,10 @@ exec { 'titandb installer' :
   path => '/usr/bin'
 }
 -> exec{ 'unpack titandb':
-  command => "/usr/bin/unzip ${titanZipFile} -C ${titanInstallDir}",
+  command => "/usr/bin/unzip /tmp/${titanZipFile} -C ${titanInstallDir}",
   cwd => '/tmp',
   user => root,
-  unless => "/usr/bin/test ! -f ${titanZipFile}",
+  unless => "/usr/bin/test ! -f /tmp/${titanZipFile}",
   require => Exec['titandb installer']
 }
 -> file { "${titanInstallDir}/titan-${titanInstallDir}":

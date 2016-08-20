@@ -10,3 +10,5 @@ target
 *.swp
 .librarian/
 .tmp/
+/puppet/environments/web/modules/*
+/puppet/environments/db/modules/*

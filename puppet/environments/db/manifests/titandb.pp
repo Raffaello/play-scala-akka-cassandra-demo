@@ -24,10 +24,10 @@ exec { 'titandb installer' :
   timeout => 0
 }
 -> exec{ 'unpack titandb':
-  command => "/usr/bin/unzip /tmp/${titanZipFile} -d ${titanInstallDir}",
+  command => "/usr/bin/unzip /tmp/${titanZipFile} -o -d ${titanInstallDir}",
   cwd => '/tmp',
   user => root,
-  unless => "/usr/bin/test ! -f /tmp/${titanZipFile}",
+  unless => "/usr/bin/test ! -f ${titanInstallDir}/bin/titan.sh",
   require => Exec['titandb installer'],
   timeout => 0
 }

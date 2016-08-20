@@ -4,24 +4,24 @@ $titanZipFile = "titan-${titanDbVer}-hadoop1.zip"
 $titanInstallDir = "/usr/share"
 
 notice("Installing TitanDB version ${titanDbVer}")
-#exec { 'titandb installer' :
-#  command => "${curl} http://s3.thinkaurelius.com/downloads/titan/titan-${titanDbVer}-hadoop1.zip > $titanZipFile",
-#  cwd => '/tmp',
-#  #unless => 'which titan.sh',
-#  path => '/usr/bin'
-#}
-#-> exec{ 'unpack titandb':
-#  command => "/usr/bin/unzip ${titanZipFile} -C ${titanInstallDir}",
-#  cwd => '/tmp',
-#  user => root,
-#  unless => "/usr/bin/test ! -f ${titanZipFile}",
-#  require => Exec['titandb installer']
-#}
-#-> file { "${titanInstallDir}/titan-${titanInstallDir}":
-#  ensure => 'present',
-#  mode => '0755',
-#  owner => 'vagrant',
-#  group => 'vagrant',
-#  recurse => true
-#}
-#-> pathmunge { "${titanInstallDir}/titan-${titanDbVer}/bin": }
+exec { 'titandb installer' :
+  command => "${curl} http://s3.thinkaurelius.com/downloads/titan/titan-${titanDbVer}-hadoop1.zip > $titanZipFile",
+  cwd => '/tmp',
+  #unless => 'which titan.sh',
+  path => '/usr/bin'
+}
+-> exec{ 'unpack titandb':
+  command => "/usr/bin/unzip ${titanZipFile} -C ${titanInstallDir}",
+  cwd => '/tmp',
+  user => root,
+  unless => "/usr/bin/test ! -f ${titanZipFile}",
+  require => Exec['titandb installer']
+}
+-> file { "${titanInstallDir}/titan-${titanInstallDir}":
+  ensure => 'present',
+  mode => '0755',
+  owner => 'vagrant',
+  group => 'vagrant',
+  recurse => true
+}
+-> pathmunge { "${titanInstallDir}/titan-${titanDbVer}/bin": }

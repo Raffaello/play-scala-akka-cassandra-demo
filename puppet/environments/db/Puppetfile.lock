@@ -1,0 +1,35 @@
+FORGE
+  remote: https://forgeapi.puppetlabs.com
+  specs:
+    garethr-docker (5.2.0)
+      puppetlabs-apt (<= 3.0.0, >= 1.8.0)
+      puppetlabs-stdlib (>= 4.1.0)
+      stahnma-epel (>= 0.0.6)
+    locp-cassandra (1.25.1)
+      puppetlabs-apt (< 3.0.0, >= 2.0.0)
+      puppetlabs-firewall (< 2.0.0, >= 1.0.0)
+      puppetlabs-inifile (< 2.0.0, >= 1.0.0)
+      puppetlabs-stdlib (< 5.0.0, >= 3.0.0)
+    panaman-pathmunge (1.0.0)
+      puppetlabs-stdlib (>= 4.1.0)
+    puppet-archive (1.0.0)
+      puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
+    puppetlabs-apt (2.2.2)
+      puppetlabs-stdlib (< 5.0.0, >= 4.5.0)
+    puppetlabs-docker_platform (2.1.0)
+      garethr-docker (= 5.2.0)
+    puppetlabs-firewall (1.8.1)
+    puppetlabs-inifile (1.5.0)
+    puppetlabs-java (1.6.0)
+      puppetlabs-stdlib (< 5.0.0, >= 2.4.0)
+    puppetlabs-stdlib (4.12.0)
+    stahnma-epel (1.2.2)
+      puppetlabs-stdlib (>= 3.0.0)
+
+DEPENDENCIES
+  locp-cassandra (= 1.25.1)
+  panaman-pathmunge (= 1.0.0)
+  puppet-archive (= 1.0.0)
+  puppetlabs-docker_platform (= 2.1.0)
+  puppetlabs-java (= 1.6.0)
+

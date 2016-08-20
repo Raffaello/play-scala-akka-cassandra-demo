@@ -1,6 +1,6 @@
 class { 'java':
 #  distribution => 'oracle-jdk',
-  java_alternative => '/usr/java/jdk1.8.0_51/jre/bin/java',
+  java_alternative => 'java',
   java_alternative_path => '/usr/java/jdk1.8.0_51/jre/bin/java'
 
 }

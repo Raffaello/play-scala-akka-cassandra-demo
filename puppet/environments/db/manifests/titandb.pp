@@ -1,7 +1,8 @@
 #include '::archive'
 $curl = '/usr/bin/curl'
 $titanDbVer = '1.0.0'
-$titanZipFile = "titan-${titanDbVer}-hadoop1.zip"
+$titanPath = "titan-${titanDbVer}-hadoop1"
+$titanZipFile = "${titanPath}.zip"
 $titanInstallDir = "/usr/share"
 
 #archive { "/tmp/${titanZipFile}":
@@ -30,11 +31,11 @@ exec { 'titandb installer' :
   require => Exec['titandb installer'],
   timeout => 0
 }
--> file { "${titanInstallDir}/titan-${titanInstallDir}":
+-> file { "${titanInstallDir}/${titanInstallDir}/${titanPath}":
   ensure => 'present',
   mode => '0755',
   owner => 'vagrant',
   group => 'vagrant',
   recurse => true
 }
--> pathmunge { "${titanInstallDir}/titan-${titanDbVer}/bin": }
+-> pathmunge { "${titanInstallDir}/${titanPath}/bin": }

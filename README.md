@@ -13,6 +13,8 @@
 - Vagrant >= 1.8
 - vbguest plugin
 - vagrant-puppet-install plugin
+- vagrant plugin install vagrant-librarian-puppet (optional)
+- puppetlibrarian
 - VirtualBox 5.1
 
 ### Puppet

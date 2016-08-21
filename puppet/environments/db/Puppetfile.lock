@@ -1,6 +1,7 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
+    fiddyspence-sysctl (1.1.0)
     garethr-docker (5.2.0)
       puppetlabs-apt (<= 3.0.0, >= 1.8.0)
       puppetlabs-stdlib (>= 4.1.0)
@@ -12,6 +13,9 @@ FORGE
       puppetlabs-stdlib (< 5.0.0, >= 3.0.0)
     panaman-pathmunge (1.0.0)
       puppetlabs-stdlib (>= 4.1.0)
+    petems-swap_file (3.0.2)
+      fiddyspence-sysctl (= 1.1.0)
+      puppetlabs-stdlib (>= 4.7.0)
     puppet-archive (1.0.0)
       puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
     puppetlabs-apt (2.2.2)
@@ -29,6 +33,7 @@ FORGE
 DEPENDENCIES
   locp-cassandra (= 1.25.1)
   panaman-pathmunge (= 1.0.0)
+  petems-swap_file (= 3.0.2)
   puppet-archive (= 1.0.0)
   puppetlabs-docker_platform (= 2.1.0)
   puppetlabs-java (= 1.6.0)

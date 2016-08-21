@@ -21,6 +21,11 @@
 
 - Puppet 4.5.3
 
+## Browser sites
+
+- Docker UI => 10.10.10.10:9000 or 127.0.0.1:9000
+- scala app => 10.10.1.10:80    or 127.0.0.1:8080
+
 ## [WIP] servers architecture
 
 - 2/3 micro web services running background processes

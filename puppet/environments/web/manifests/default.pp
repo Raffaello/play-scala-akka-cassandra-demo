@@ -17,7 +17,9 @@ exec { 'yum upgrade':
   cwd => '/usr/bin',
   path => '/usr/bin',
   timeout => 0,
-  unless => '/usr/bin/test $(rpm -q --last kernel | perl -pe \'s/^kernel-(\S+).*/$1/\' | head -1) = $(uname -r)',
+  unless => 'LAST_KERNEL=$(rpm -q --last kernel | perl -pe \'s/^kernel-(\S+).*/$1/\' | head -1); \
+   CURRENT_KERNEL=$(uname -r); \
+   /usr/bin/test $LAST_KERNEL = $CURRENT_KERNEL || /usr/sbin/reboot',
   logoutput => true
 }
 #class { 'docker':

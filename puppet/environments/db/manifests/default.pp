@@ -11,6 +11,9 @@ exec { 'unzip':
   timeout => 0
 }
 
-
+### SWAP FILE
+swap_file::files { 'default':
+  ensure => absent
+}
 
 

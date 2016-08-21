@@ -31,8 +31,3 @@ class {'linux::base::timezone' :
 class {'linux::security::selinux' :
   mode => permissive,
 }
-
-### SWAP FILE
-swap_file::files { 'default':
-  ensure => absent
-}

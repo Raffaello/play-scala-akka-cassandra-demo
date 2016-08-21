@@ -1,0 +1,10 @@
+# File managed by puppet. 
+## file generate at: <%= Time.now.utc %>
+
+<%- if @domainname_real -%>
+domain <%= @domainname_real %>
+search <%= @domainname_real %>
+<%- end -%>
+nameserver 10.0.2.3
+nameserver 8.8.8.8
+options timeout:1

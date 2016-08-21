@@ -6,9 +6,8 @@ exec { 'yum upgrade':
   timeout => 0
 }
 
-exec { 'unzip':
-  command => '/usr/bin/yum install -y unzip',
-  timeout => 0
+package {'unzip':
+  ensure => present
 }
 
 ### SWAP FILE

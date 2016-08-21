@@ -6,14 +6,13 @@ exec { 'yum upgrade':
   timeout => 0
 }
 -> exec { 'reboot':
-  command => '/usr/bin/reboot',
-  cwd => '/usr/bin',
-  path => '/usr/bin',
+  command => '/usr/sbin/reboot',
+  cwd => '/usr/sbin',
+  path => '/usr/sbin',
   timeout => 0,
-  unless => 'LAST_KERNEL=$(rpm -q --last kernel | perl -pe \'s/^kernel-(\S+).*/$1/\' | head -1); \
+  unless => "LAST_KERNEL=$(rpm -q --last kernel | perl -pe 's/^kernel-(\\S+).*/\$1/' | head -1); \
    CURRENT_KERNEL=$(uname -r); \
-   /usr/bin/test $LAST_KERNEL = $CURRENT_KERNEL || /usr/sbin/reboot
-  ',
+   /usr/bin/test \$LAST_KERNEL = \$CURRENT_KERNEL",
   logoutput => true
 }
 

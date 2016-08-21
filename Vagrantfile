@@ -106,6 +106,7 @@ Vagrant.configure("2") do |config|
     db.ssh.insert_key = false
     db.puppet_install.puppet_version = "4.5.3"
     db.vm.hostname = "db.dev"
+    db.vm.network "forwarded_port", guest: 9000, host: 9000
     db.librarian_puppet.puppetfile_dir = "puppet/environments/db"
     db.vm.provision "puppet" do |puppet|
         puppet.environment = 'db'

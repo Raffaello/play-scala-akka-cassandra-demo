@@ -78,6 +78,8 @@ Vagrant.configure("2") do |config|
       web.ssh.insert_key = false
       web.puppet_install.puppet_version = "4.5.3"
       web.vm.hostname = "web.dev"
+      web.vm.network "forwarded_port", guest: 80, host: 8080
+      web.vm.network "private_network", ip: "10.10.1.10"
       web.librarian_puppet.puppetfile_dir = "puppet/environments/web"
       web.vm.provision "puppet" do |puppet|
 	    puppet.environment = 'web'

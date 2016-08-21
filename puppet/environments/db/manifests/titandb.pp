@@ -31,7 +31,7 @@ exec { 'titandb installer' :
   require => Exec['titandb installer'],
   timeout => 0
 }
--> file { "${titanInstallDir}/${titanPath}":
+-> file { "${titanInstallDir}/${titanPath}/bin/titan.sh":
   ensure => 'present',
   mode => '0755',
   owner => 'vagrant',

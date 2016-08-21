@@ -33,6 +33,6 @@ class {'linux::security::selinux' :
 }
 
 ### SWAP FILE
-#swap_file::files { 'default':
-#  ensure => absent
-#}
+swap_file::files { 'default':
+  ensure => absent
+}

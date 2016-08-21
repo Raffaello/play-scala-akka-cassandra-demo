@@ -50,7 +50,7 @@ Vagrant.configure("2") do |config|
         vb.gui = false
       #
       #   # Customize the amount of memory on the VM:
-        vb.memory = "256"
+        vb.memory = "512"
 	    vb.cpus=2
       end
       #
@@ -92,7 +92,7 @@ Vagrant.configure("2") do |config|
     db.vm.box_check_update = false
     db.vm.provider "virtualbox" do |vb|
       vb.gui = false
-      vb.memory = "256"
+      vb.memory = "512"
       vb.cpus = 2
     end
 

@@ -5,13 +5,13 @@
 #
 #}
 #
-exec { 'yum upgrade':
-  command => '/usr/bin/yum -y upgrade',
-  cwd => '/usr/bin',
-  path => '/usr/bin',
-  logoutput => true,
-  timeout => 0
-}
+#exec { 'yum upgrade':
+#  command => '/usr/bin/yum -y upgrade',
+#  cwd => '/usr/bin',
+#  path => '/usr/bin',
+#  logoutput => true,
+#  timeout => 0
+#}
 #-> exec { 'reboot':
 #  command => '/usr/bin/reboot',
 #  cwd => '/usr/bin',
@@ -24,9 +24,9 @@ exec { 'yum upgrade':
 #}
 
 
-reboot { 'after':
-  subscribe       => Exec['yum upgrade']
-}
+#reboot { 'after':
+#  subscribe       => Exec['yum upgrade']
+#}
 
 #class { 'docker':
 #    version => '1.12.1'

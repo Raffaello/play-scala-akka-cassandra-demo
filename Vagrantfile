@@ -71,9 +71,10 @@ Vagrant.configure("2") do |config|
       #   apt-get update
       #   apt-get install -y apache2
 
-      web.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
-			#group: "www-data", owner:"www-data", 
-			mount_options: ['dmode=775', 'fmode=774'] 
+      #web.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+		#	#group: "www-data", owner:"www-data",
+		#	mount_options: ['dmode=775', 'fmode=774']
+      web.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo", type: "nfs"
 
       web.ssh.insert_key = false
       web.puppet_install.puppet_version = "4.5.3"

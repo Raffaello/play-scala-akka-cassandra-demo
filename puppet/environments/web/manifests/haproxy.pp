@@ -1,6 +1,7 @@
 class { 'haproxy':
   #global_options => {},
-  #defaults_options => {}
+  #defaults_options => {},
+  merge_options => true
 }
 
 haproxy::listen { 'web-haproxy':

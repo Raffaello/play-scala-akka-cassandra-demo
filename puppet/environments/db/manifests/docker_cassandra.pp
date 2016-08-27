@@ -5,7 +5,8 @@ docker::run { 'cassandra-1':
   image => 'cassandra:3.7',
   name => 'cassandra-1',
   require => Docker::Image[ 'cassandra'],
-  remove_container_on_stop  => false
+  remove_container_on_stop  => false,
+  hostname => 'db.dev.cassandra-1'
   #  tag => 3.7
 }
 
@@ -16,6 +17,7 @@ docker::run { 'cassandra-1':
   links => ['cassandra-1'],
   name => 'cassandra-2',
   require => Docker::Image[ 'cassandra'],
-  remove_container_on_stop  => false
+  remove_container_on_stop  => false,
+  hostname => 'db.dev.cassandra-2'
   #  tag => 'cassandra:3.7'
 }

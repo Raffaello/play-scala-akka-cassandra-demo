@@ -3,7 +3,6 @@ class { '::consul':
     'bootstrap_expect' => 1,
     'client_addr'      => '0.0.0.0',
     'data_dir'         => '/opt/consul',
-#    'datacenter'       => 'east-aws',
     'log_level'        => 'INFO',
     'node_name'        => 'db.dev.consul',
     'server'           => true,

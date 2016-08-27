@@ -86,7 +86,7 @@ exec { 'scala installer' :
   unless => "/usr/bin/test ! -f ${scala_file}",
   require => Exec['scala installer']
 }
--> file { "${install_path}/scala-${scala_version}":
+-> file { "${install_path}/scala-${scala_version}/bin":
   ensure => 'present',
   mode => '0755',
   owner => 'vagrant',

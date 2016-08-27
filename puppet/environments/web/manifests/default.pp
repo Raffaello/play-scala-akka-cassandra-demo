@@ -5,13 +5,13 @@
 #
 #}
 #
-#exec { 'yum upgrade':
-#  command => '/usr/bin/yum -y upgrade',
-#  cwd => '/usr/bin',
-#  path => '/usr/bin',
-#  logoutput => true,
-#  timeout => 0
-#}
+exec { 'yum upgrade':
+  command => '/usr/bin/yum -y upgrade',
+  cwd => '/usr/bin',
+  path => '/usr/bin',
+  logoutput => true,
+  timeout => 0
+}
 #-> exec { 'reboot':
 #  command => '/usr/bin/reboot',
 #  cwd => '/usr/bin',
@@ -22,6 +22,12 @@
 #   /usr/bin/test $LAST_KERNEL = $CURRENT_KERNEL || /usr/sbin/reboot',
 #  logoutput => true
 #}
+
+
+reboot { 'after':
+  subscribe       => Exec['yum upgrade']
+}
+
 #class { 'docker':
 #    version => '1.12.1'
 #}

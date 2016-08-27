@@ -1,10 +1,10 @@
-#exec { 'yum upgrade':
-#  command => '/usr/bin/yum -y upgrade',
-#  cwd => '/usr/bin',
-#  path => '/usr/bin',
-#  logoutput => true,
-#  timeout => 0
-#}
+exec { 'yum upgrade':
+  command => '/usr/bin/yum -y upgrade',
+  cwd => '/usr/bin',
+  path => '/usr/bin',
+  logoutput => true,
+  timeout => 0
+}
 #-> exec { 'reboot':
 #  command => '/usr/sbin/reboot',
 #  cwd => '/usr/sbin',
@@ -23,6 +23,10 @@ package {'unzip':
 ### SWAP FILE
 swap_file::files { 'default':
   ensure => absent
+}
+
+reboot { 'after':
+  subscribe       => Exec['yum upgrade']
 }
 
 

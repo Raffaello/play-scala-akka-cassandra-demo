@@ -33,7 +33,7 @@ docker::run { 'cassandra-1':
 #docker run --name cassandra-2 -d --link cassandra-1 cassandra:3.7
 -> docker::run { 'cassandra-2':
   image => 'cassandra:3.7',
-  links => ['cassandata-1'],
+  links => ['cassandra-1'],
   name => 'cassandra-2',
   require => Docker::Image[ 'cassandra'],
   remove_container_on_stop  => false

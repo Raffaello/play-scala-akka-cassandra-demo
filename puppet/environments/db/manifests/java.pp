@@ -1,14 +1,5 @@
-package {'java-1.7.0-openjdk':
-  ensure => absent,
-  before => Class['java']
-}
-package {'java-1.8.0-openjdk':
-  ensure => absent,
-  before => Class['java']
-}
-->
 class { 'java':
-#  distribution => 'oracle-jdk',
+  distribution => 'jdk',
   java_alternative => 'java',
   java_alternative_path => '/usr/java/jdk1.8.0_51/jre/bin/java'
 }

@@ -23,6 +23,7 @@
 ## Browser sites
 
 - Docker UI => 10.10.10.10:9000 or 127.0.0.1:9000
+- Consul UI => 10.10.10.10:8500 or 127.0.0.1:8500
 - scala app => 10.10.1.10:80    or 127.0.0.1:8080
 
 ## [WIP] servers architecture

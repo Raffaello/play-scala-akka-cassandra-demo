@@ -26,6 +26,7 @@ FORGE
     puppetlabs-inifile (1.5.0)
     puppetlabs-java (1.6.0)
       puppetlabs-stdlib (< 5.0.0, >= 2.4.0)
+    puppetlabs-reboot (1.2.1)
     puppetlabs-stdlib (4.12.0)
     stahnma-epel (1.2.2)
       puppetlabs-stdlib (>= 3.0.0)
@@ -37,4 +38,5 @@ DEPENDENCIES
   puppet-archive (= 1.0.0)
   puppetlabs-docker_platform (= 2.1.0)
   puppetlabs-java (= 1.6.0)
+  puppetlabs-reboot (= 1.2.1)
 

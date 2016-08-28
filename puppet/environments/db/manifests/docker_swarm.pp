@@ -6,17 +6,16 @@
 #  }
 #}
 
-docker::image { 'swarm': image_tag => latest }
-::docker::run { 'swarm':
+::docker::image { 'swarm': image_tag => latest }
+::docker::run { 'swarm-consul-join':
   image   => 'swarm',
   command => "join --addr=${::ipaddress}:2375 consul://${::ipaddress}:8500/swarm_nodes"
 }
-
+->
 ::docker::run { 'swarm-manager':
   image => 'swarm',
   ports => '3000:2375',
-  command => "manage consul://${ipaddress}:8500/swarm_nodes",
-  require => docker::run['swarm']
+  command => "manage consul://${ipaddress}:8500/swarm_nodes"
 }
 
 exec { 'consul join db.dev':
@@ -24,7 +23,7 @@ exec { 'consul join db.dev':
   require   => Class['consul'],
   before    => Class['docker'],
   tries     => 10,
-  try_sleep => 1,
+  try_sleep => 1
 }
 
 #

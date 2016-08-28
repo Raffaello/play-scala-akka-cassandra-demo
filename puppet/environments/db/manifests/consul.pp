@@ -1,7 +1,7 @@
 class { '::consul':
   config_hash => {
     'bootstrap_expect' => 1,
-    'bootstrap'        => true,
+#    'bootstrap'        => true,
     'client_addr'      => '0.0.0.0',
     'data_dir'         => '/opt/consul',
     'log_level'        => 'INFO',

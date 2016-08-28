@@ -85,7 +85,7 @@ Vagrant.configure("2") do |config|
       web.vm.provision "puppet" do |puppet|
 	    puppet.environment = 'web'
 	    puppet.environment_path = "puppet/environments"
-        puppet.options = "--verbose"
+        puppet.options = "--verbose --summarize --reports store"
         puppet.module_path = "puppet/environments/web/modules"
       end
   end
@@ -113,7 +113,7 @@ Vagrant.configure("2") do |config|
     db.vm.provision "puppet" do |puppet|
         puppet.environment = 'db'
         puppet.environment_path = 'puppet/environments'
-        puppet.options = "--verbose"
+        puppet.options = "--verbose --summarize --reports store"
         puppet.module_path = "puppet/environments/db/modules"
     end
   end

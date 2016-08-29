@@ -5,7 +5,7 @@ class esNode {
   }
 }
 
-node '^/es-\d+$/' {
+node /^es-\d+$/ {
   include javaNode
   include esNode
 

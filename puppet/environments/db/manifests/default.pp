@@ -15,16 +15,31 @@
 #   /usr/bin/test \$LAST_KERNEL = \$CURRENT_KERNEL",
 #  logoutput => true
 #}
+class defaultNode {
+  package { 'unzip':
+    ensure => present
+  }
 
-package {'unzip':
-  ensure => present
+  package { 'htop':
+    ensure => present
+  }
+
+  ### SWAP FILE
+  swap_file::files { 'default':
+    ensure => absent
+  }
+
+  #reboot { 'after':
+  #  subscribe       => Exec['yum upgrade']
+  #}
 }
 
-### SWAP FILE
-swap_file::files { 'default':
-  ensure => absent
+node 'db.dev' {
+  include defaultNode
+  include javaNode
+  include consulNode
+  include dockerNode
+  include dockerCassandraNode
+  include dockerSwarmNode
+  include titanNode
 }
-
-#reboot { 'after':
-#  subscribe       => Exec['yum upgrade']
-#}

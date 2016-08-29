@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
       # Disable automatic box update checking. If you disable this, then
       # boxes will only be checked for updates when the user runs
       # `vagrant box outdated`. This is not recommended.
-      web.vm.box_check_update = false
+      web.vm.box_check_update = true
 
       # Create a forwarded port mapping which allows access to a specific port
       # within the machine from a port on the host machine. In the example below,
@@ -92,7 +92,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.define "db-vm" do |db|
     db.vm.box = "centos/7"
-    db.vm.box_check_update = false
+    db.vm.box_check_update = true
     db.vm.provider "virtualbox" do |vb|
       vb.gui = false
       vb.memory = "512"
@@ -115,6 +115,40 @@ Vagrant.configure("2") do |config|
         puppet.environment_path = 'puppet/environments'
         puppet.options = "--verbose --summarize --reports store"
         puppet.module_path = "puppet/environments/db/modules"
+    end
+  end
+
+  $es_cluster_size = 2 # max 99
+  $es_cluster_size.times do |n|
+    id = n+1
+    ip = "10.10.20.1#{id}"
+    name = "es-0#{id}"
+
+    config.vm.define name do |es|
+        es.vm.box = "centos/7"
+        es.vm.box_check_update = true
+        es.vm.provider "virtualbox" do |vb|
+          vb.gui = false
+          vb.memory = "512"
+          vb.cpus = 2
+        end
+
+	    es.vm.network "private_network", ip: ip
+        es.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+      	    		#group: "www-data", owner:"www-data",
+                            mount_options: ['dmode=775', 'fmode=774']
+
+        es.ssh.insert_key = false
+        es.puppet_install.puppet_version = "4.5.3"
+        es.vm.hostname = name
+        es.vm.network "forwarded_port", guest: 9200, host: 9200
+        es.librarian_puppet.puppetfile_dir = "puppet/environments/db"
+        es.vm.provision "puppet" do |puppet|
+            puppet.environment = 'db'
+            puppet.environment_path = 'puppet/environments'
+            puppet.options = "--verbose --summarize --reports store"
+            puppet.module_path = "puppet/environments/db/modules"
+        end
     end
   end
 end

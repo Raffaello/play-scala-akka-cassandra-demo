@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+puppetVersion = "4.6.1"
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -11,7 +13,6 @@ Vagrant.configure("2") do |config|
       # The most common configuration options are documented and commented below.
       # For a complete reference, please see the online documentation at
       # https://docs.vagrantup.com.
-
       # Every Vagrant development environment requires a box. You can search for
       # boxes at https://atlas.hashicorp.com/search.
       web.vm.box = "centos/7"
@@ -25,11 +26,9 @@ Vagrant.configure("2") do |config|
       # within the machine from a port on the host machine. In the example below,
       # accessing "localhost:8080" will access port 80 on the guest machine.
       # config.vm.network "forwarded_port", guest: 80, host: 8080
-
       # Create a private network, which allows host-only access to the machine
       # using a specific IP.
       # config.vm.network "private_network", ip: "192.168.33.10"
-
       # Create a public network, which generally matched to bridged network.
       # Bridged networks make the machine appear as another physical device on
       # your network.
@@ -40,7 +39,6 @@ Vagrant.configure("2") do |config|
       # the path on the guest to mount the folder. And the optional third
       # argument is a set of non-required options.
       # config.vm.synced_folder "../data", "/vagrant_data"
-
       # Provider-specific configuration so you can fine-tune various
       # backing providers for Vagrant. These expose provider-specific options.
       # Example for VirtualBox:
@@ -77,7 +75,7 @@ Vagrant.configure("2") do |config|
       web.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo", type: "nfs"
 
       web.ssh.insert_key = false
-      web.puppet_install.puppet_version = "4.5.3"
+      web.puppet_install.puppet_version = puppetVersion
       web.vm.hostname = "web.dev"
       web.vm.network "forwarded_port", guest: 80, host: 8080
       web.vm.network "private_network", ip: "10.10.1.10"
@@ -105,7 +103,7 @@ Vagrant.configure("2") do |config|
                         mount_options: ['dmode=775', 'fmode=774']
  
     db.ssh.insert_key = false
-    db.puppet_install.puppet_version = "4.5.3"
+    db.puppet_install.puppet_version = puppetVersion
     db.vm.hostname = "db.dev"
     db.vm.network "forwarded_port", guest: 9000, host: 9000
     db.vm.network "forwarded_port", guest: 8500, host: 8500
@@ -139,7 +137,7 @@ Vagrant.configure("2") do |config|
                             mount_options: ['dmode=775', 'fmode=774']
 
         es.ssh.insert_key = false
-        es.puppet_install.puppet_version = "4.5.3"
+        es.puppet_install.puppet_version = puppetVersion
         es.vm.hostname = name
         es.vm.network "forwarded_port", guest: 9200, host: 9200
         es.librarian_puppet.puppetfile_dir = "puppet/environments/db"

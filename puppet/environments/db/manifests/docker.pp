@@ -17,8 +17,3 @@ docker::run { 'docker-ui':
   require => Docker::Image[ 'uifd/ui-for-docker' ],
   remove_container_on_stop  => false,
 }
-
-
-
-### ES
-

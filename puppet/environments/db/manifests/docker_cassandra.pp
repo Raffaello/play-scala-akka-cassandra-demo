@@ -1,6 +1,6 @@
-# docker run --name some-cassandra -d cassandra:tag
 docker::image { 'cassandra': image_tag => 3.7 }
 
+# docker run --name some-cassandra -d cassandra:tag
 docker::run { 'cassandra-1':
   image => 'cassandra:3.7',
   name => 'cassandra-1',

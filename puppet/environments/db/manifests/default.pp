@@ -28,5 +28,3 @@ swap_file::files { 'default':
 #reboot { 'after':
 #  subscribe       => Exec['yum upgrade']
 #}
-
-

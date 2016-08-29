@@ -20,7 +20,10 @@ class defaultNode {
     ensure => present
   }
 
-  package { 'htop':
+  package {'epel-release':
+    ensure => present
+  }
+  -> package { 'htop':
     ensure => present
   }
 

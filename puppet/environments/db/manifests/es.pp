@@ -1,7 +1,7 @@
 node /^es-\d+$/ {
   include defaultNode
   include javaNode
-  include esNode
+  #include esNode
 
   package { 'wget':
     ensure => present

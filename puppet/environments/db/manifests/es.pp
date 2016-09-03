@@ -1,7 +1,7 @@
-node /^es-\d+$/ {
+class esNode ($net_host, $es_version='2.4.0')
+{
   include defaultNode
   include javaNode
-  #include esNode
 
   package { 'wget':
     ensure => present
@@ -12,19 +12,19 @@ node /^es-\d+$/ {
     'ES_MAX_HEAP_SIZE' => '128M'
   }
 
-  $es_version = '2.4.0'
   class { 'elasticsearch':
     java_install      => false,
-    package_url => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",
-#    manage_repo       => false,
-#    repo_version      => '2.3.5',
-    restart_on_change => true,
-    autoupgrade       => true,
-    require => Package['wget'],
-    init_defaults => $config_hash,
-    config => {
+    package_url       => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",
+    #    manage_repo       => false,
+    #    repo_version      => '2.3.5',
+    restart_on_change => false,
+    autoupgrade       => false,
+    require           => Package['wget'],
+    init_defaults     => $config_hash,
+    config            => {
       'cluster.name' => 'TitanDB_Index',
-      'network.host' => $::ipaddress
+      'network.host' => "$net_host",
+      
     }
   }
 
@@ -32,5 +32,13 @@ node /^es-\d+$/ {
 
   elasticsearch::plugin { 'lmenezes/elasticsearch-kopf':
     instances => $hostname
+  }
+}
+
+node /^es-\d+$/
+{
+  class { 'esNode':
+    net_host   => "10.10.20.1$1",
+    es_version => '2.4.0'
   }
 }

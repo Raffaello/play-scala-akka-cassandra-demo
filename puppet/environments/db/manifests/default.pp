@@ -16,6 +16,8 @@
 #  logoutput => true
 #}
 class defaultNode {
+  include noSwapNode
+
   package { 'unzip':
     ensure => present
   }
@@ -27,14 +29,19 @@ class defaultNode {
     ensure => present
   }
 
+  #reboot { 'after':
+  #  subscribe       => Exec['yum upgrade']
+  #}
+}
+
+class noSwapNode {
   ### SWAP FILE
   swap_file::files { 'default':
     ensure => absent
   }
 
-  #reboot { 'after':
-  #  subscribe       => Exec['yum upgrade']
-  #}
+  # @TODO Seems not working... do it "manually":
+  # https://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-swap-removing.html
 }
 
 node 'db.dev' {

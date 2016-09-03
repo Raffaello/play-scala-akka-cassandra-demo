@@ -27,12 +27,12 @@ class esNode ($net_host, $es_version='2.4.0')
     config            => {
       'cluster.name' => 'TitanDB_Index',
       'network.host' => "$net_host",
-    }
+    },
   }
-#  elasticsearch::instance { $hostname: }
 
+  elasticsearch::instance { $hostname: }
   elasticsearch::plugin { 'lmenezes/elasticsearch-kopf/v2.1.1':
-    ensure => present
+    instances => $hostname
   }
 }
 

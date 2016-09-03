@@ -12,6 +12,7 @@ class esNode ($net_host, $es_version='2.4.0')
     'ES_MAX_HEAP_SIZE' => '128M'
   }
 
+  # semanage port -a -t syslogd_port_t -p tcp 9200
   class {'linux::security::selinux' :
     mode => permissive
   }

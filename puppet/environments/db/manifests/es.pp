@@ -1,7 +1,3 @@
-class esNode {
-
-}
-
 node /^es-\d+$/ {
   include defaultNode
   include javaNode
@@ -16,9 +12,10 @@ node /^es-\d+$/ {
     'ES_MAX_HEAP_SIZE' => '128M'
   }
 
+  $es_version = '2.4.0'
   class { 'elasticsearch':
     java_install      => false,
-    package_url => 'https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.3.5/elasticsearch-2.3.5.rpm',
+    package_url => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",
 #    manage_repo       => false,
 #    repo_version      => '2.3.5',
     restart_on_change => true,
@@ -26,7 +23,7 @@ node /^es-\d+$/ {
     require => Package['wget'],
     init_defaults => $config_hash,
     config => {
-      'cluster.name' => 'TitanDB Index',
+      'cluster.name' => 'TitanDB_Index',
       'network.host' => $::ipaddress
     }
   }

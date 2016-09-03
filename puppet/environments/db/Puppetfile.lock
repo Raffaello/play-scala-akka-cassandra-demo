@@ -16,6 +16,8 @@ FORGE
       puppetlabs-apt (<= 3.0.0, >= 1.8.0)
       puppetlabs-stdlib (>= 4.1.0)
       stahnma-epel (>= 0.0.6)
+    mtulio-linux (1.1.1)
+      puppetlabs-stdlib (>= 4.10.0)
     panaman-pathmunge (1.0.0)
       puppetlabs-stdlib (>= 4.1.0)
     petems-swap_file (3.0.2)
@@ -35,12 +37,15 @@ FORGE
     richardc-datacat (0.6.2)
     stahnma-epel (1.2.2)
       puppetlabs-stdlib (>= 3.0.0)
+    thias-selinux (1.0.4)
 
 DEPENDENCIES
   KyleAnderson-consul (= 1.0.10)
   elasticsearch-elasticsearch (= 0.13.2)
+  mtulio-linux (= 1.1.1)
   panaman-pathmunge (= 1.0.0)
   petems-swap_file (= 3.0.2)
   puppetlabs-docker_platform (= 2.1.0)
   puppetlabs-java (= 1.6.0)
+  thias-selinux (= 1.0.4)
 

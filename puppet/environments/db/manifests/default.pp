@@ -46,6 +46,7 @@ class noSwapNode {
 
 node 'db.dev' {
   include defaultNode
+  include osNode
   include javaNode
   include consulNode
   include dockerNode

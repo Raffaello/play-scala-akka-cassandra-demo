@@ -13,7 +13,7 @@ class esNode ($net_host, $es_version='2.4.0')
   }
 
   class {'linux::security::selinux' :
-    mode => permissive,
+    mode => permissive
   }
 
   -> class { 'elasticsearch':
@@ -41,6 +41,8 @@ class esNode ($net_host, $es_version='2.4.0')
 
 node /^es-\d+$/
 {
+  include osNode
+
   class { 'esNode':
     net_host   => "10.10.20.1$1",
     es_version => '2.4.0'

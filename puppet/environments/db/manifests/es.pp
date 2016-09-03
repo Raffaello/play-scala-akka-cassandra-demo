@@ -12,27 +12,31 @@ class esNode ($net_host, $es_version='2.4.0')
     'ES_MAX_HEAP_SIZE' => '128M'
   }
 
-  class { 'elasticsearch':
+  class {'linux::security::selinux' :
+    mode => permissive,
+  }
+
+  -> class { 'elasticsearch':
     java_install      => false,
     package_url       => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",
-    #    manage_repo       => false,
-    #    repo_version      => '2.3.5',
-    restart_on_change => false,
+    restart_on_change => true,
     autoupgrade       => false,
     require           => Package['wget'],
     init_defaults     => $config_hash,
     config            => {
       'cluster.name' => 'TitanDB_Index',
       'network.host' => "$net_host",
-      
-    }
+    },
+    plugins => ['lmenezes/elasticsearch-kopf']
   }
 
-  elasticsearch::instance { $hostname: }
 
-  elasticsearch::plugin { 'lmenezes/elasticsearch-kopf':
-    instances => $hostname
-  }
+
+#  elasticsearch::instance { $hostname: }
+
+#  elasticsearch::plugin { 'lmenezes/elasticsearch-kopf':
+#    instances => $hostname
+#  }
 }
 
 node /^es-\d+$/

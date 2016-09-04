@@ -49,6 +49,7 @@ GIT
 DEPENDENCIES
   KyleAnderson-consul (= 1.0.10)
   elasticsearch-elasticsearch (= 0.13.2)
+  fiddyspence-sysctl (= 1.1.0)
   mtulio-linux (= 1.1.1)
   panaman-pathmunge (= 1.0.0)
   petems-swap_file (= 3.0.2)

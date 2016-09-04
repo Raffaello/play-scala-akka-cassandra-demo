@@ -18,7 +18,7 @@ class esNode ($net_host, $es_version='2.4.0')
     protocol => 'tcp',
     port     => '9200',
   }
-  -> selinux::port { 'es port':
+  -> selinux::port { 'es port2':
     context  => 'syslogd_port_t',
     protocol => 'tcp',
     port     => '9300',

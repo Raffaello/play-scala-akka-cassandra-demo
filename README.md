@@ -31,7 +31,7 @@
 
 - 2/3 micro web services running background processes
 - 1 web server for display dashboard, could be shared with one akka instance
-- 2 cassandra node running titans
+- 3 cassandra node running titans
 
 ### web-vm
 

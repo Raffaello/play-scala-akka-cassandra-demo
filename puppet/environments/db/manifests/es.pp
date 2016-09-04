@@ -41,7 +41,8 @@ node /^es-\d+$/
   include osNode
 
   class { 'esNode':
-    net_host   => "10.10.20.1$1",
+    #net_host   => "10.10.20.1$1",
+    net_host   => "0.0.0.0",
     es_version => '2.4.0'
   }
 }

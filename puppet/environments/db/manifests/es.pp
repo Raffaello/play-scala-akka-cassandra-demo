@@ -18,6 +18,23 @@ class esNode ($net_host, $es_version='2.4.0')
     protocol => 'tcp',
     port     => '9200',
   }
+  -> selinux::port { 'es port':
+    context  => 'syslogd_port_t',
+    protocol => 'tcp',
+    port     => '9300',
+  }
+  # sysctl -w vm.max_map_count=262144
+  -> sysctl { 'vm.max_map_count':
+    ensure    => 'present',
+    permanent => 'yes',
+    value     => '262144',
+  }
+  -> sysctl { 'fs.file-max':
+    ensure => 'present',
+    permanent => 'yes',
+    value => '65535'
+  }
+
   -> class { 'elasticsearch':
     java_install      => false,
     package_url       => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",
@@ -28,10 +45,12 @@ class esNode ($net_host, $es_version='2.4.0')
     config            => {
       'cluster.name' => 'TitanDB_Index',
       'network.host' => "$net_host",
+      'bootstrap.memory_lock' => true,
+      'discovery.zen.ping.unicast.hosts' => ['es-01', 'es-02']
     },
   }
 
-  elasticsearch::instance { $hostname: }
+  #elasticsearch::instance { $hostname: }
   elasticsearch::plugin { 'lmenezes/elasticsearch-kopf':
     instances => $hostname
   }

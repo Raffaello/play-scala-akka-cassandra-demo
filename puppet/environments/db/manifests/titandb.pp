@@ -40,4 +40,6 @@ class titanNode {
     recurse => true
   }
   -> pathmunge { "${titanInstallDir}/${titanPath}/bin": }
+
+  #-> file { ""}
 }

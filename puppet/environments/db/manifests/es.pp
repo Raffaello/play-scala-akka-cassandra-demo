@@ -50,7 +50,7 @@ class esNode ($net_host, $es_version='2.4.0')
     },
   }
 
-  #elasticsearch::instance { $hostname: }
+  elasticsearch::instance { $hostname: }
   elasticsearch::plugin { 'lmenezes/elasticsearch-kopf':
     instances => $hostname
   }

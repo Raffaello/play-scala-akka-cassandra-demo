@@ -13,10 +13,11 @@ class esNode ($net_host, $es_version='2.4.0')
   }
 
   # semanage port -a -t syslogd_port_t -p tcp 9200
-  class {'linux::security::selinux' :
-    mode => permissive
+  selinux::port { 'es port':
+    context  => 'syslogd_port_t',
+    protocol => 'tcp',
+    port     => '9200',
   }
-
   -> class { 'elasticsearch':
     java_install      => false,
     package_url       => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",
@@ -36,13 +37,13 @@ class esNode ($net_host, $es_version='2.4.0')
   }
 }
 
-node /^es-\d+$/
+node /^es-0(\d+)$/
 {
   include osNode
 
   class { 'esNode':
-    #net_host   => "10.10.20.1$1",
-    net_host   => "0.0.0.0",
+    net_host   => "10.10.20.1$1",
+    #net_host   => "0.0.0.0",
     es_version => '2.4.0'
   }
 }

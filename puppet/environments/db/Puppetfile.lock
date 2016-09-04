@@ -37,7 +37,14 @@ FORGE
     richardc-datacat (0.6.2)
     stahnma-epel (1.2.2)
       puppetlabs-stdlib (>= 3.0.0)
-    thias-selinux (1.0.4)
+
+GIT
+  remote: git://github.com/voxpupuli/puppet-selinux.git
+  ref: master
+  sha: 15fde36a5b6267bdfff273c8bdfaee2b9624c570
+  specs:
+    puppet-selinux (0.4.2-rc0)
+      puppetlabs-stdlib (>= 0)
 
 DEPENDENCIES
   KyleAnderson-consul (= 1.0.10)
@@ -45,7 +52,7 @@ DEPENDENCIES
   mtulio-linux (= 1.1.1)
   panaman-pathmunge (= 1.0.0)
   petems-swap_file (= 3.0.2)
+  puppet-selinux (>= 0)
   puppetlabs-docker_platform (= 2.1.0)
   puppetlabs-java (= 1.6.0)
-  thias-selinux (= 1.0.4)
 

@@ -116,7 +116,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  $es_cluster_size = 2 # max 99
+  $es_cluster_size = 2 # max 9
   $es_cluster_size.times do |n|
     id = n+1
     ip = "10.10.20.1#{id}"

@@ -166,7 +166,7 @@ Vagrant.configure("2") do |config|
           end
 
       cas.vm.network "private_network", ip: ip
-      ca.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+      cas.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
                         #group: "www-data", owner:"www-data",
                               mount_options: ['dmode=775', 'fmode=774']
 

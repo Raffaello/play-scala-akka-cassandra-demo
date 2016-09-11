@@ -46,15 +46,10 @@ class esNode ($net_host, $es_version='2.4.0')
   -> limits::fragment {
     "elasticsearch/soft/memlock":
       value => "unlimited";
-    "*/hard/nofile":
+    "elasticsearch/soft/memlock":
       value => "unlimited";
   }
-  -> limits::fragment {
-    "elasticsearch/hard/memlock":
-      value => "unlimited";
-    "*/hard/nofile":
-      value => "unlimited";
-  }
+  
   -> class { 'elasticsearch':
     java_install      => false,
     package_url       => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",

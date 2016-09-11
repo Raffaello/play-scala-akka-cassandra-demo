@@ -46,10 +46,10 @@ class esNode ($net_host, $es_version='2.4.0')
   -> limits::fragment {
     "elasticsearch/soft/memlock":
       value => "unlimited";
-    "elasticsearch/soft/memlock":
+    "elasticsearch/hard/memlock":
       value => "unlimited";
   }
-  
+
   -> class { 'elasticsearch':
     java_install      => false,
     package_url       => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",
@@ -64,8 +64,9 @@ class esNode ($net_host, $es_version='2.4.0')
       'cluster.name' => 'TitanDB_Index',
       'network.host' => "$net_host",
       'bootstrap.memory_lock' => true,
-      #'discovery.zen.ping.unicast.hosts' => ['es-01', 'es-02']
-      'discovery.zen.ping.multicast.enabled' => true
+      #'discovery.zen.ping.multicast.enabled' => true,
+      "discovery.zen.ping.multicast.enabled" => false,
+      "discovery.zen.ping.unicast.hosts" => ["10.10.20.11"]
     },
     #ensure => present,
     #status => enabled

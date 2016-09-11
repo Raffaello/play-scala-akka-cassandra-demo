@@ -39,6 +39,9 @@ class esNode ($net_host, $es_version='2.4.0')
     java_install      => false,
     package_url       => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",
     restart_on_change => true,
+#    restart_config_change => true,
+#    restart_plugin_change => true,
+#    restart_package_change => true,
     autoupgrade       => false,
     require           => Package['wget'],
     init_defaults     => $config_hash,
@@ -46,8 +49,11 @@ class esNode ($net_host, $es_version='2.4.0')
       'cluster.name' => 'TitanDB_Index',
       'network.host' => "$net_host",
       'bootstrap.memory_lock' => true,
-      'discovery.zen.ping.unicast.hosts' => ['es-01', 'es-02']
+      #'discovery.zen.ping.unicast.hosts' => ['es-01', 'es-02']
+      'discovery.zen.ping.multicast.enabled' => true
     },
+    #ensure => present,
+    #status => enabled
   }
 
   elasticsearch::instance { $hostname: }

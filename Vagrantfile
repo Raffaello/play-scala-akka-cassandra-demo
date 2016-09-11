@@ -149,4 +149,37 @@ Vagrant.configure("2") do |config|
         end
     end
   end
+
+  $cassandra_cluster_size = 3 # max 9
+    $cassandra_cluster_size.times do |n|
+      id = n+1
+      ip = "10.10.30.1#{id}"
+      name = "cassandra-0#{id}"
+
+      config.vm.define name do |cas|
+          cas.vm.box = "centos/7"
+          cas.vm.box_check_update = true
+          cas.vm.provider "virtualbox" do |vb|
+            vb.gui = false
+            vb.memory = "256"
+            vb.cpus = 2
+          end
+
+      cas.vm.network "private_network", ip: ip
+      ca.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+                        #group: "www-data", owner:"www-data",
+                              mount_options: ['dmode=775', 'fmode=774']
+
+      cas.ssh.insert_key = false
+      cas.puppet_install.puppet_version = puppetVersion
+      cas.vm.hostname = name
+      cas.librarian_puppet.puppetfile_dir = "puppet/environments/db"
+      cas.vm.provision "puppet" do |puppet|
+          puppet.environment = 'db'
+          puppet.environment_path = 'puppet/environments'
+          puppet.options = "--verbose --summarize --reports store"
+          puppet.module_path = "puppet/environments/db/modules"
+      end
+    end
+  end
 end

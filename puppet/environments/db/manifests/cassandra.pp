@@ -49,6 +49,11 @@ class cassandraNode {
   }
 }
 
+node /^cassandra-0(\d+)$/
+{
+  include osNode
+  include cassandraNode
+}
 
 ##-> class { 'cassandra::schema':
 ##  users => { 'cassandra' => { password => 'cassandra'}},

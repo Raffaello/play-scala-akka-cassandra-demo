@@ -1,6 +1,7 @@
 class esNode ($net_host, $es_version='2.4.0')
 {
   include defaultNode
+  include noSwapNode
   include javaNode
 
   package { 'wget':
@@ -23,6 +24,11 @@ class esNode ($net_host, $es_version='2.4.0')
     protocol => 'tcp',
     port     => '9300',
   }
+  -> selinux::port { 'es multicast':
+    context  => 'syslogd_port_t',
+    protocol => 'tcp',
+    port     => '54328',
+  }
   # sysctl -w vm.max_map_count=262144
   -> sysctl { 'vm.max_map_count':
     ensure    => 'present',
@@ -35,6 +41,20 @@ class esNode ($net_host, $es_version='2.4.0')
     value => '65535'
   }
 
+  #elasticsearch soft memlock unlimited
+  #elasticsearch hard memlock unlimited
+  -> limits::fragment {
+    "elasticsearch/soft/memlock":
+      value => "unlimited";
+    "*/hard/nofile":
+      value => "unlimited";
+  }
+  -> limits::fragment {
+    "elasticsearch/hard/memlock":
+      value => "unlimited";
+    "*/hard/nofile":
+      value => "unlimited";
+  }
   -> class { 'elasticsearch':
     java_install      => false,
     package_url       => "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/$es_version/elasticsearch-$es_version.rpm",

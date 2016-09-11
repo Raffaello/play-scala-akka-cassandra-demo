@@ -27,6 +27,10 @@
 - scala app => 10.10.1.10:80    or 127.0.0.1:8080
 - ES        => 10.10.20.11:9200/_plugin/kopf/ (for each node really)
 
+### other IPs
+
+- cassandra titan => 10.10.30.1[1-3]
+
 ## [WIP] servers architecture
 
 - 2/3 micro web services running background processes

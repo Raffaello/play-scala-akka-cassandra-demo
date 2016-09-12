@@ -161,7 +161,7 @@ Vagrant.configure("2") do |config|
           cas.vm.box_check_update = true
           cas.vm.provider "virtualbox" do |vb|
             vb.gui = false
-            vb.memory = "256"
+            vb.memory = "512"
             vb.cpus = 2
           end
 

@@ -1,4 +1,4 @@
-class osNode {
+class osNode($interface = 'eth1') {
   ### MOTD
   $motdTemplateErb ="
 #########################################################
@@ -8,7 +8,7 @@ class osNode {
 <% if @domain %>
 # Domain		: <%= @domain %>
 <% end %>
-# IP address		: <%= @ipaddress %> / <%= @netmask %>
+# IP address		: <%= @ipaddress_${interface} %> / <%= @netmask %>
 # Operating System	: <%= @operatingsystem %>  <%= @operatingsystemrelease %> [kernel ver <%= @kernelversion %> ]
 <% if @is_virtual == 'true' %>
 # Virtual		: <%= @productname %> - <%= @virtual %>

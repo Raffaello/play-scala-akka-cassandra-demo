@@ -30,16 +30,29 @@
 ### other IPs
 
 - cassandra titan => 10.10.30.1[1-3]
+- TitanDB   => 10.10.40.11
 
 ## [WIP] servers architecture
 
-- 2/3 micro web services running background processes
-- 1 web server for display dashboard, could be shared with one akka instance
-- 3 cassandra node running titans
+### DB Environment
+
+- db-vm => docker, dockerSwarm, consul, (management purpose)
+- Cassandra cluster => general column data store
+- Elastic Search cluster => indexes
+- TitanDB Cluster => Gremlin Server remoting to Cassandra
 
 ### web-vm
 
 - HAProxy
+
+### db-vm
+
+### cassandra
+
+
+### titandb
+
+### es
 
 
 --------------------------

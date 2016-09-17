@@ -1,6 +1,6 @@
 class cassandraNode {
   include defaultNode
-  #include noSwapNode
+  include noSwapNode
   include javaNode
 
   file {'/hints':
@@ -57,11 +57,11 @@ class cassandraNode {
     file => 'cassandra-env.sh',
     file_lines => {
       'MAX_HEAP_SIZE' => {
-        line  => 'MAX_HEAP_SIZE="64M"',
+        line  => 'MAX_HEAP_SIZE="128M"',
         match => '#MAX_HEAP_SIZE="4G"'
       },
       'HEAP_NEWSIZE'  => {
-        line  => "HEAP_NEWSIZE='16M'",
+        line  => "HEAP_NEWSIZE='32M'",
         match => '#HEAP_NEWSIZE="800M"'
       },
 #      'JMX remote true' => {

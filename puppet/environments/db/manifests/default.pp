@@ -15,6 +15,7 @@
 #   /usr/bin/test \$LAST_KERNEL = \$CURRENT_KERNEL",
 #  logoutput => true
 #}
+
 class defaultNode {
   include noSwapNode
 

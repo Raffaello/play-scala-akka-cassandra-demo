@@ -36,7 +36,7 @@
 
 ### DB Environment
 
-- db-vm => docker, dockerSwarm, consul, (management purpose)
+- db-vm (management purpose) => docker, dockerSwarm, consul, gremlin-server, opsCenter 
 - Cassandra cluster => general column data store
 - Elastic Search cluster => indexes
 - TitanDB Cluster => Gremlin Server remoting to Cassandra

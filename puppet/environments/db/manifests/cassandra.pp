@@ -50,7 +50,8 @@ class cassandraNode {
     hinted_handoff_throttle_in_kb => 0,
     max_hints_delivery_threads => 1,
 #    hints_directory => ""
-    memtable_flush_writers => 2
+    memtable_flush_writers => 2,
+    rpc_interface => 'eth1'
   }
 
   class { 'cassandra::file':

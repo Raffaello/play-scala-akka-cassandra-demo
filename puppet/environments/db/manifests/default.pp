@@ -52,5 +52,4 @@ node 'db.dev' {
   include dockerNode
   include dockerCassandraNode
   include dockerSwarmNode
-  include titanNode
 }

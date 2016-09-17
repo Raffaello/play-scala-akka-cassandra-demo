@@ -151,19 +151,19 @@ Vagrant.configure("2") do |config|
   end
 
   $cassandra_cluster_size = 3 # max 9
-    $cassandra_cluster_size.times do |n|
-      id = n+1
-      ip = "10.10.30.1#{id}"
-      name = "cassandra-0#{id}"
+  $cassandra_cluster_size.times do |n|
+    id = n+1
+    ip = "10.10.30.1#{id}"
+    name = "cassandra-0#{id}"
 
-      config.vm.define name do |cas|
-          cas.vm.box = "centos/7"
-          cas.vm.box_check_update = true
-          cas.vm.provider "virtualbox" do |vb|
+    config.vm.define name do |cas|
+        cas.vm.box = "centos/7"
+        cas.vm.box_check_update = true
+        cas.vm.provider "virtualbox" do |vb|
             vb.gui = false
             vb.memory = "512"
             vb.cpus = 2
-          end
+        end
 
       cas.vm.network "private_network", ip: ip
       cas.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
@@ -182,4 +182,37 @@ Vagrant.configure("2") do |config|
       end
     end
   end
+
+    $titandb_cluster_size = 1 # max 9
+    $titandb_cluster_size.times do |n|
+      id = n+1
+      ip = "10.10.40.1#{id}"
+      name = "titandb-0#{id}"
+
+      config.vm.define name do |tit|
+          tit.vm.box = "centos/7"
+          tit.vm.box_check_update = true
+          tit.vm.provider "virtualbox" do |vb|
+              vb.gui = false
+              vb.memory = "512"
+              vb.cpus = 2
+          end
+
+        tit.vm.network "private_network", ip: ip
+        tit.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+                          #group: "www-data", owner:"www-data",
+                                mount_options: ['dmode=775', 'fmode=774']
+
+        tit.ssh.insert_key = false
+        tit.puppet_install.puppet_version = puppetVersion
+        tit.vm.hostname = name
+        tit.librarian_puppet.puppetfile_dir = "puppet/environments/db"
+        tit.vm.provision "puppet" do |puppet|
+            puppet.environment = 'db'
+            puppet.environment_path = 'puppet/environments'
+            puppet.options = "--verbose --summarize --reports store"
+            puppet.module_path = "puppet/environments/db/modules"
+        end
+      end
+    end
 end

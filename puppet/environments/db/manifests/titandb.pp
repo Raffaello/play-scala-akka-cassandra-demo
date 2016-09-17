@@ -43,3 +43,9 @@ class titanNode {
 
   #-> file { ""}
 }
+
+node /^titandb-0(\d+)$/
+{
+  include osNode
+  include titanNode
+}

@@ -132,9 +132,9 @@ Vagrant.configure("2") do |config|
         end
 
 	    es.vm.network "private_network", ip: ip
-        es.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
-      	    		#group: "www-data", owner:"www-data",
-                            mount_options: ['dmode=775', 'fmode=774']
+        #es.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+      	#    		#group: "www-data", owner:"www-data",
+        #                    mount_options: ['dmode=775', 'fmode=774']
 
         es.ssh.insert_key = false
         es.puppet_install.puppet_version = puppetVersion
@@ -166,9 +166,9 @@ Vagrant.configure("2") do |config|
         end
 
       cas.vm.network "private_network", ip: ip
-      cas.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
-                        #group: "www-data", owner:"www-data",
-                              mount_options: ['dmode=775', 'fmode=774']
+      #cas.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+      #                  #group: "www-data", owner:"www-data",
+      #                        mount_options: ['dmode=775', 'fmode=774']
 
       cas.ssh.insert_key = false
       cas.puppet_install.puppet_version = puppetVersion
@@ -177,7 +177,7 @@ Vagrant.configure("2") do |config|
       cas.vm.provision "puppet" do |puppet|
           puppet.environment = 'db'
           puppet.environment_path = 'puppet/environments'
-          puppet.options = "--verbose --summarize --reports store"
+          puppet.options = "--verbose --summarize --reports store --debug"
           puppet.module_path = "puppet/environments/db/modules"
       end
     end
@@ -199,9 +199,9 @@ Vagrant.configure("2") do |config|
           end
 
         tit.vm.network "private_network", ip: ip
-        tit.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
-                          #group: "www-data", owner:"www-data",
-                                mount_options: ['dmode=775', 'fmode=774']
+        #tit.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+        #                  #group: "www-data", owner:"www-data",
+        #                        mount_options: ['dmode=775', 'fmode=774']
 
         tit.ssh.insert_key = false
         tit.puppet_install.puppet_version = puppetVersion

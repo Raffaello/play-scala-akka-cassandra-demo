@@ -3,22 +3,16 @@ class cassandraNode {
   include noSwapNode
   include javaNode
 
-  file {'/hints':
-    ensure => present,
-    before => Class['cassandra'],
-    mode => '0775',
-    group => 'cassandra',
-    owner => 'cassandra'
-  }
-  -> package { 'jemalloc':
+  package { 'jemalloc':
     ensure => present
   }
-  -> class { 'cassandra::datastax_repo':
+
+  class { 'cassandra::datastax_repo':
     pkg_url => 'http://rpm.datastax.com/datastax-ddc/3.7',
   	before => Class['cassandra']
   }
   -> class { 'cassandra':
-    #authenticator		 => 'PasswordAuthenticator',
+    authenticator		 => 'PasswordAuthenticator',
     cluster_name 		=> 'cassandra_cluster',
     dc			=> 'DC1',
     endpoint_snitch		=> 'GossipingPropertyFileSnitch',
@@ -53,8 +47,21 @@ class cassandraNode {
     memtable_flush_writers => 2,
     rpc_interface => 'eth1'
   }
-  -> class { 'cassandra::datastax_agent':
-    stomp_interface => '10.10.10.10'
+  -> file {'/hints/':
+    ensure => directory,
+    mode => '0775',
+    group => 'cassandra',
+    owner => 'cassandra',
+  }
+
+  yumrepo { "datastax-community":
+    baseurl => "http://rpm.datastax.com/community",
+    descr => "datastax-community",
+    enabled => 1,
+    gpgcheck => 0
+  } ->
+  class { 'cassandra::datastax_agent':
+    stomp_interface => '10.10.10.10',
   }
 
   $jmxRemotePw = 'jmxremote.password'
@@ -76,10 +83,10 @@ class cassandraNode {
         line  => 'LOCAL_JMX=no',
         match => 'LOCAL_JMX=yes'
       },
-      'JMX remote true' => {
-        line  => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=true"',
-        match => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=false"'
-      },
+#      'JMX remote true' => {
+#        line  => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=true"',
+#        match => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=false"'
+#      },
       'JVM_OPTS server.hostname' => {
         line  => "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$ipaddress_eth1\"",
         match => 'JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=<public name>"',
@@ -87,6 +94,7 @@ class cassandraNode {
       'JVM_OPTS out of mem' => {
         line => 'JVM_OPTS="$JVM_OPTS -XX:+HeapDumpOnOutOfMemoryError"'
       },
+      # there is a $CASSANDRA_HEAPDUMP_DIR var too...
       'JVM_OPTS crash log' => {
         line => 'JVM_OPTS="$JVM_OPTS -XX:HeapDumpPath=/var/log/cassandra/crash_`date +%s`.hprof"'
       },
@@ -116,7 +124,8 @@ unregister'
     group   => 'cassandra',
     ensure  => present,
     content => $jmxRemotePwContent,
-    mode    => '0400'
+    mode    => '0400',
+#    source => 'puppet:///files/jmxremote.password'
   }
   file { $jmxRemoteAcc:
     path    => "$jmxPath/$jmxRemoteAcc",
@@ -124,7 +133,8 @@ unregister'
     group   => 'cassandra',
     ensure  => present,
     content => $jmxRemoteAccContent,
-    mode    => '0400'
+    mode    => '0400',
+#    source => 'puppet:///files/jmxremote.access'
   }
 }
 
@@ -139,8 +149,3 @@ node /^cassandra-0(\d+)$/
 ##  #cqlsh_password => 'cassandra',
 ##  #cqlsh_user     => 'cassandra',
 ##}
-##-> class { 'cassandra::datastax_agent':
-##  stomp_interface => "${::ipaddress}"
-##}
-##-> class { '::cassandra::opscenter': }
-

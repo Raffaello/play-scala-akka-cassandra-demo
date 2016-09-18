@@ -47,8 +47,8 @@ class titanNode {
 
   file_line { "gremlin titan-cassandra-es.properties":
     require => Exec['unpack titandb'],
-    path => "${titanInstallDir}/${titanPath}/conf/gremlin-server/gremlin-server.yaml",
-    line => '  graph: conf/gremlin-server/titan-cassandra-es-server.properties}',
+    path  => "${titanInstallDir}/${titanPath}/conf/gremlin-server/gremlin-server.yaml",
+    line  => '  graph: conf/gremlin-server/titan-cassandra-es-server.properties}',
     match => '  graph: conf/gremlin-server/titan-berkeleyje-server.properties}'
   }
 
@@ -59,8 +59,8 @@ class titanNode {
     match => 'storage.hostname=127.0.0.1'
   }
   file_line {"t-c-e.p 2":
-    path => "${titanInstallDir}/${titanPath}/conf/titan-cassandra-es.properties",
-    line => 'index.search.hostname=10.10.20.11, 10.10.20.12',
+    path  => "${titanInstallDir}/${titanPath}/conf/titan-cassandra-es.properties",
+    line  => 'index.search.hostname=10.10.20.11, 10.10.20.12',
     match => 'index.search.hostname=127.0.0.1'
   }
 

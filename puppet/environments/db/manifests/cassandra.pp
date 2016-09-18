@@ -57,6 +57,10 @@ class cassandraNode {
     stomp_interface => '10.10.10.10'
   }
 
+  $jmxRemotePw = 'jmxremote.password'
+  $jmxRemoteAcc = 'jmxremote.access'
+  $jmxPath = '/etc/cassandra'
+
   class { 'cassandra::file':
     file => 'cassandra-env.sh',
     file_lines => {
@@ -68,21 +72,60 @@ class cassandraNode {
         line  => "HEAP_NEWSIZE='32M'",
         match => '#HEAP_NEWSIZE="800M"'
       },
-#      'JMX remote true' => {
-#        line  => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=true"',
-#        match => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=false"'
-#      },
-#      'JVM_OPTS server.hostname' => {
-#        line => "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$ipaddress\"",
-#        match => 'JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=<public name>"',
-#      },
+      'NO LOCAL_JMX' => {
+        line => '    LOCAL_JMX=no',
+        match => '    LOCAL_JMX=yes'
+      },
+      'JMX remote true' => {
+        line  => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=true"',
+        match => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=false"'
+      },
+      'JVM_OPTS server.hostname' => {
+        line => "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$ipaddress\"",
+        match => 'JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=<public name>"',
+      },
       'JVM_OPTS out of mem' => {
         line => 'JVM_OPTS="$JVM_OPTS -XX:+HeapDumpOnOutOfMemoryError"'
       },
       'JVM_OPTS crash log' => {
         line => 'JVM_OPTS="$JVM_OPTS -XX:HeapDumpPath=/var/log/cassandra/crash_`date +%s`.hprof"'
+      },
+      'JVM_OPTS remote.pw' => {
+        match => '#JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.password.file=/etc/cassandra/jmxremote.password"',
+        line => "JVM_OPTS=\"\$JVM_OPTS -Dcom.sun.management.jmxremote.password.file=${jmxPath}/${jmxRemotePw}\""
+      },
+      'JVM_OPTS remote.access' => {
+        match => '#JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.access.file=/etc/cassandra/jmxremote.access"',
+        line => "JVM_OPTS=\"\$JVM_OPTS -Dcom.sun.management.jmxremote.access.file=${jmxPath}/${jmxRemoteAcc}\""
       }
     }
+  }
+
+  $jmxRemotePwContent = 'monitorRole QED
+controlRole R&D
+cassandra cassandra'
+
+  $jmxRemoteAccContent = 'monitorRole readonly
+cassandra readwrite
+controlRole readwrite \
+create javax.management.monitor.,javax.management.timer. \
+unregister'
+
+  file { $jmxRemotePw:
+    path    => $jmxPath,
+    owner   => 'cassandra',
+    group   => 'cassandra',
+    ensure  => present,
+    content => $jmxRemotePwContent,
+    mode    => 400
+  }
+  file { $jmxRemoteAcc:
+    path    => $jmxPath,
+    owner   => 'cassandra',
+    group   => 'cassandra',
+    ensure  => present,
+    content => $jmxRemoteAccContent,
+    mode    => 400
   }
 }
 

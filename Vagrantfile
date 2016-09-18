@@ -177,7 +177,7 @@ Vagrant.configure("2") do |config|
       cas.vm.provision "puppet" do |puppet|
           puppet.environment = 'db'
           puppet.environment_path = 'puppet/environments'
-          puppet.options = "--verbose --summarize --reports store --debug"
+          puppet.options = "--verbose --summarize --reports store"
           puppet.module_path = "puppet/environments/db/modules"
       end
     end

@@ -43,7 +43,7 @@ class cassandraNode {
     hinted_handoff_enabled => false,
     hinted_handoff_throttle_in_kb => 0,
     max_hints_delivery_threads => 1,
-#    hints_directory => ""
+#    hints_directory => "",
     memtable_flush_writers => 2,
     rpc_interface => 'eth1'
   }
@@ -59,8 +59,8 @@ class cassandraNode {
     descr => "datastax-community",
     enabled => 1,
     gpgcheck => 0
-  } ->
-  class { 'cassandra::datastax_agent':
+  } 
+  -> class { 'cassandra::datastax_agent':
     stomp_interface => '10.10.10.10',
   }
 
@@ -83,10 +83,6 @@ class cassandraNode {
         line  => 'LOCAL_JMX=no',
         match => 'LOCAL_JMX=yes'
       },
-#      'JMX remote true' => {
-#        line  => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=true"',
-#        match => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=false"'
-#      },
       'JVM_OPTS server.hostname' => {
         line  => "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$ipaddress_eth1\"",
         match => 'JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=<public name>"',

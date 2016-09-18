@@ -37,9 +37,12 @@ class defaultNode {
 
 class noSwapNode {
   ### SWAP FILE
-  swap_file::files { 'default':
+  swap_file::files { '/dev/dm-1':
     ensure => absent
   }
+  -> exec { 'swapoff -a':
+    command => '/usr/sbin/swapoff -a'
+   }
 
   # @TODO Seems not working... do it "manually":
   # https://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-swap-removing.html

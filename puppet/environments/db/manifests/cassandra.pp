@@ -112,7 +112,7 @@ create javax.management.monitor.,javax.management.timer. \
 unregister'
 
   file { $jmxRemotePw:
-    path    => $jmxPath,
+    path    => "$jmxPath/$jmxRemotePw",
     owner   => 'cassandra',
     group   => 'cassandra',
     ensure  => present,
@@ -120,7 +120,7 @@ unregister'
     mode    => 400
   }
   file { $jmxRemoteAcc:
-    path    => $jmxPath,
+    path    => "$jmxPath/$jmxRemoteAcc",
     owner   => 'cassandra',
     group   => 'cassandra',
     ensure  => present,

@@ -53,6 +53,9 @@ class cassandraNode {
     memtable_flush_writers => 2,
     rpc_interface => 'eth1'
   }
+  -> class { 'cassandra::datastax_agent':
+    stomp_interface => '10.10.10.10'
+  }
 
   class { 'cassandra::file':
     file => 'cassandra-env.sh',

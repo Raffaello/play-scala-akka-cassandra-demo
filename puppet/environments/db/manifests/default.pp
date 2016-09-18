@@ -53,4 +53,8 @@ node 'db.dev' {
   include dockerNode
   include dockerCassandraNode
   include dockerSwarmNode
+
+  class { '::cassandra::datastax_repo': } ->
+  class { '::cassandra': } ->
+  class { '::cassandra::opscenter': }
 }

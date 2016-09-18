@@ -66,4 +66,5 @@ DEPENDENCIES
   puppetlabs-docker_platform (= 2.1.0)
   puppetlabs-java (= 1.6.0)
   puppetlabs-limits (= 0.1.0)
+  puppetlabs-stdlib (= 4.12.0)
 

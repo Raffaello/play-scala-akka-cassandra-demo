@@ -73,15 +73,15 @@ class cassandraNode {
         match => '#HEAP_NEWSIZE="800M"'
       },
       'NO LOCAL_JMX' => {
-        line => '    LOCAL_JMX=no',
-        match => '    LOCAL_JMX=yes'
+        line  => 'LOCAL_JMX=no',
+        match => 'LOCAL_JMX=yes'
       },
       'JMX remote true' => {
         line  => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=true"',
         match => 'JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=false"'
       },
       'JVM_OPTS server.hostname' => {
-        line => "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$ipaddress\"",
+        line  => "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$ipaddress_eth1\"",
         match => 'JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=<public name>"',
       },
       'JVM_OPTS out of mem' => {
@@ -92,11 +92,11 @@ class cassandraNode {
       },
       'JVM_OPTS remote.pw' => {
         match => '#JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.password.file=/etc/cassandra/jmxremote.password"',
-        line => "JVM_OPTS=\"\$JVM_OPTS -Dcom.sun.management.jmxremote.password.file=${jmxPath}/${jmxRemotePw}\""
+        line  => "JVM_OPTS=\"\$JVM_OPTS -Dcom.sun.management.jmxremote.password.file=${jmxPath}/${jmxRemotePw}\""
       },
       'JVM_OPTS remote.access' => {
         match => '#JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.access.file=/etc/cassandra/jmxremote.access"',
-        line => "JVM_OPTS=\"\$JVM_OPTS -Dcom.sun.management.jmxremote.access.file=${jmxPath}/${jmxRemoteAcc}\""
+        line  => "JVM_OPTS=\"\$JVM_OPTS -Dcom.sun.management.jmxremote.access.file=${jmxPath}/${jmxRemoteAcc}\""
       }
     }
   }
@@ -108,7 +108,6 @@ cassandra cassandra'
   $jmxRemoteAccContent = 'monitorRole readonly
 cassandra readwrite
 controlRole readwrite \
-create javax.management.monitor.,javax.management.timer. \
 unregister'
 
   file { $jmxRemotePw:

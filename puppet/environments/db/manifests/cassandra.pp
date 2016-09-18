@@ -117,7 +117,7 @@ unregister'
     group   => 'cassandra',
     ensure  => present,
     content => $jmxRemotePwContent,
-    mode    => 400
+    mode    => '0400'
   }
   file { $jmxRemoteAcc:
     path    => "$jmxPath/$jmxRemoteAcc",
@@ -125,7 +125,7 @@ unregister'
     group   => 'cassandra',
     ensure  => present,
     content => $jmxRemoteAccContent,
-    mode    => 400
+    mode    => '0400'
   }
 }
 

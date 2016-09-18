@@ -132,12 +132,9 @@ Vagrant.configure("2") do |config|
         end
 
 	    es.vm.network "private_network", ip: ip
-	    es.vbguest.auto_update = false
-        es.vbguest.no_remote = true
-        #es.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
-      	#    		#group: "www-data", owner:"www-data",
-        #                    mount_options: ['dmode=775', 'fmode=774']
-        es.vm.synced_folder ".", "/vagrant", disabled: true
+        es.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+      	    		#group: "www-data", owner:"www-data",
+                            mount_options: ['dmode=775', 'fmode=774']
         es.ssh.insert_key = false
         es.puppet_install.puppet_version = puppetVersion
         es.vm.hostname = name
@@ -161,8 +158,6 @@ Vagrant.configure("2") do |config|
     config.vm.define name do |cas|
         cas.vm.box = "centos/7"
         cas.vm.box_check_update = true
-        cas.vbguest.auto_update = false
-        cas.vbguest.no_remote = true
         cas.vm.provider "virtualbox" do |vb|
             vb.gui = false
             vb.memory = "512"
@@ -170,10 +165,9 @@ Vagrant.configure("2") do |config|
         end
 
       cas.vm.network "private_network", ip: ip
-      #cas.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
-      #                  #group: "www-data", owner:"www-data",
-      #                        mount_options: ['dmode=775', 'fmode=774']
-      cas.vm.synced_folder ".", "/vagrant", disabled: true
+      cas.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+                        #group: "www-data", owner:"www-data",
+                              mount_options: ['dmode=775', 'fmode=774']
       cas.ssh.insert_key = false
       cas.puppet_install.puppet_version = puppetVersion
       cas.vm.hostname = name
@@ -203,12 +197,9 @@ Vagrant.configure("2") do |config|
           end
 
         tit.vm.network "private_network", ip: ip
-        tit.vbguest.auto_update = false
-        tit.vbguest.no_remote = true
-        #tit.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
-        #                  #group: "www-data", owner:"www-data",
-        #                        mount_options: ['dmode=775', 'fmode=774']
-        tit.vm.synced_folder ".", "/vagrant", disabled: true
+        tit.vm.synced_folder ".", "/home/vagrant/play-scala-akka-cassandra-demo",
+                          #group: "www-data", owner:"www-data",
+                                mount_options: ['dmode=775', 'fmode=774']
         tit.ssh.insert_key = false
         tit.puppet_install.puppet_version = puppetVersion
         tit.vm.hostname = name

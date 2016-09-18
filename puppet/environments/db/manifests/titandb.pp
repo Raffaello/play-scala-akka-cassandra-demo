@@ -1,5 +1,6 @@
 class titanNode {
   include defaultNode
+  include noSwapNode
   include javaNode
 
   #include '::archive'

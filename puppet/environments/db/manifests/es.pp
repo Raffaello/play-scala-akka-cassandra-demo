@@ -1,7 +1,7 @@
 class esNode ($net_host, $es_version='2.4.0')
 {
   include defaultNode
-  #include noSwapNode
+  include noSwapNode
   include javaNode
 
   package { 'wget':

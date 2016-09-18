@@ -17,7 +17,6 @@
 #}
 
 class defaultNode {
-  include noSwapNode
 
   package { 'unzip':
     ensure => present

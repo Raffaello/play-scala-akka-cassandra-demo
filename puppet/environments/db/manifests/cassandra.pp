@@ -1,6 +1,12 @@
 class cassandraNode {
   include defaultNode
-  include noSwapNode
+  #include noSwapNode
+  include ntp
+  ### the agents (datastax,..) make needs more memory, so swap needed
+  exec {'swappines':
+    command => '/sbin/sysctl vm.swappiness=10'
+  }
+
   include javaNode
 
   package { 'jemalloc':
@@ -9,9 +15,9 @@ class cassandraNode {
 
   class { 'cassandra::datastax_repo':
     pkg_url => 'http://rpm.datastax.com/datastax-ddc/3.7',
-  	before => Class['cassandra']
   }
   -> class { 'cassandra':
+    service_ensure => running,
     authenticator		 => 'PasswordAuthenticator',
     cluster_name 		=> 'cassandra_cluster',
     dc			=> 'DC1',
@@ -72,11 +78,11 @@ class cassandraNode {
     file => 'cassandra-env.sh',
     file_lines => {
       'MAX_HEAP_SIZE' => {
-        line  => 'MAX_HEAP_SIZE="128M"',
+        line  => 'MAX_HEAP_SIZE="64M"',
         match => '#MAX_HEAP_SIZE="4G"'
       },
       'HEAP_NEWSIZE'  => {
-        line  => "HEAP_NEWSIZE='32M'",
+        line  => "HEAP_NEWSIZE='16M'",
         match => '#HEAP_NEWSIZE="800M"'
       },
       'NO LOCAL_JMX' => {

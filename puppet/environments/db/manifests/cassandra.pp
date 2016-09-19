@@ -1,7 +1,6 @@
 class cassandraNode {
   include defaultNode
   #include noSwapNode
-  include ntp
   ### the agents (datastax,..) make needs more memory, so swap needed
   exec {'swappines':
     command => '/sbin/sysctl vm.swappiness=10'
@@ -35,7 +34,7 @@ class cassandraNode {
     memtable_heap_space_in_mb => 4,
     memtable_offheap_space_in_mb => 2,
     package_name => 'datastax-ddc',
-    rpc_server_type => 'hsha',
+    rpc_server_type => 'sync',
     rpc_min_threads => 1,
     rpc_max_threads => 1,
     concurrent_compactors => 1,
@@ -60,15 +59,16 @@ class cassandraNode {
     owner => 'cassandra',
   }
 
-  yumrepo { "datastax-community":
-    baseurl => "http://rpm.datastax.com/community",
-    descr => "datastax-community",
-    enabled => 1,
-    gpgcheck => 0
-  } 
-  -> class { 'cassandra::datastax_agent':
-    stomp_interface => '10.10.10.10',
-  }
+  ### not working with cassandra 3.x (opscenter needed 6.x)
+#  yumrepo { "datastax-community":
+#    baseurl => "http://rpm.datastax.com/community",
+#    descr => "datastax-community",
+#    enabled => 1,
+#    gpgcheck => 0
+#  }
+#  -> class { 'cassandra::datastax_agent':
+#    stomp_interface => '10.10.10.10',
+#  }
 
   $jmxRemotePw = 'jmxremote.password'
   $jmxRemoteAcc = 'jmxremote.access'

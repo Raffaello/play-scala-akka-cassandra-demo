@@ -26,5 +26,7 @@ class osNode($interface = 'eth1') {
   class {'linux::base::timezone' :
     timezone => 'UTC',
   }
+
+  include ntp
 }
 

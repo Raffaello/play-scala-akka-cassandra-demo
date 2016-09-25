@@ -1,7 +1,11 @@
 class esNode ($net_host, $es_version='2.4.0')
 {
   include defaultNode
-  include noSwapNode
+  ### problem provisioning, not enough ram
+#  include noSwapNode
+  exec {'swappines':
+    command => '/sbin/sysctl vm.swappiness=10'
+  }
   include javaNode
 
   package { 'wget':

@@ -57,12 +57,14 @@ class titanNode {
   # improvement for later: https://docs.puppet.com/guides/augeas.html
   -> file_line { "t-c-e.p 1":
     path  => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
-    line  => 'storage.hostname=10.10.30.11, 10.10.30.12, 10.10.30.13',
+#    line  => 'storage.hostname=10.10.30.11, 10.10.30.12, 10.10.30.13',
+    line  => 'storage.hostname=10.10.30.11',
     match => 'storage.hostname=127.0.0.1'
   }
   -> file_line {"t-c-e.p 2":
     path  => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
-    line  => 'index.search.hostname=10.10.20.11, 10.10.20.12',
+#    line  => 'index.search.hostname=10.10.20.11, 10.10.20.12',
+    line  => 'index.search.hostname=10.10.20.11',
     match => 'index.search.hostname=127.0.0.1'
   }
   -> file_line { "t-c-e.p 3":
@@ -79,7 +81,12 @@ class titanNode {
   }
   -> file_line { "t-c-e.p 6":
     path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
-    line => "storage.cassandra.keyspace=titan-db"
+    line => "storage.cassandra.keyspace=titandb"
+  }
+  -> file_line { "t-c-e,p 7":
+    path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
+    line => "index.search.elasticsearch.client-only=false",
+    match => "index.search.elasticsearch.client-only=true"
   }
 }
 

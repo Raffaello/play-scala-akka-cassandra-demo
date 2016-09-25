@@ -9,6 +9,7 @@ class titanNode {
   $titanPath = "titan-${titanDbVer}-hadoop1"
   $titanZipFile = "${titanPath}.zip"
   $titanInstallDir = "/usr/share"
+  $titanPropFile = "titan-cassandra-es.properties"
 
   #archive { "/tmp/${titanZipFile}":
   #  ensure => present,
@@ -46,25 +47,40 @@ class titanNode {
   }
   -> pathmunge { "${titanInstallDir}/${titanPath}/bin": }
 
-  file_line { "gremlin titan-cassandra-es.properties":
+  file_line { "gremlin $titanPropFile":
     require => Exec['unpack titandb'],
     path  => "${titanInstallDir}/${titanPath}/conf/gremlin-server/gremlin-server.yaml",
-    line  => '  graph: conf/gremlin-server/titan-cassandra-es-server.properties}',
+    line  => '  graph: conf/$titanPropFile}',
     match => '  graph: conf/gremlin-server/titan-berkeleyje-server.properties}'
   }
 
   # improvement for later: https://docs.puppet.com/guides/augeas.html
-  file_line { "t-c-e.p 1":
-    path  => "${titanInstallDir}/${titanPath}/conf/titan-cassandra-es.properties",
-    line  => 'storage.hostname=10.10.30.11',
+  -> file_line { "t-c-e.p 1":
+    path  => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
+    line  => 'storage.hostname=10.10.30.11, 10.10.30.12, 10.10.30.13',
     match => 'storage.hostname=127.0.0.1'
   }
-  file_line {"t-c-e.p 2":
-    path  => "${titanInstallDir}/${titanPath}/conf/titan-cassandra-es.properties",
+  -> file_line {"t-c-e.p 2":
+    path  => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
     line  => 'index.search.hostname=10.10.20.11, 10.10.20.12',
     match => 'index.search.hostname=127.0.0.1'
   }
-
+  -> file_line { "t-c-e.p 3":
+    path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
+    line => "storage.username=cassandra"
+  }
+  -> file_line { "t-c-e.p 4":
+    path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
+    line => "storage.password=cassandra"
+  }
+  -> file_line { "t-c-e.p 5":
+    path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
+    line => "gremlin.graph=com.thinkaurelius.titan.core.TitanFactory"
+  }
+  -> file_line { "t-c-e.p 6":
+    path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
+    line => "storage.cassandra.keyspace=titan-db"
+  }
 }
 
 node /^titandb-0(\d+)$/

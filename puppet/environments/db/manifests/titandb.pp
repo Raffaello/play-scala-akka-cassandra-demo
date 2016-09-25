@@ -44,7 +44,7 @@ class titanNode {
     require => Exec['unpack titandb'],
     path  => "${titanInstallDir}/${titanPath}/conf/gremlin-server/gremlin-server.yaml",
     line  => "  graph: conf/${titanPropFile}",
-    match => '  graph: conf/gremlin-server/titan-berkeleyje-server.properties}'
+    match => '  graph: conf/gremlin-server/titan-berkeleyje-server.properties'
   }
 
   # improvement for later: https://docs.puppet.com/guides/augeas.html
@@ -85,6 +85,13 @@ class titanNode {
     path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
     line => "storage.backend=cassandra",
     match => "storage.backend=cassandrathrift"
+  }
+
+  # TODO: run gremlin-server.sh on boot / after provision [systemd script]
+  -> exec { 'gremlin server as daemon':
+    command => "setsid bin/gremlin-server.sh >/var/log/titandb.log 2>&1 < /dev/null &",
+    cwd => "${titanInstallDir}/${titanPath}",
+    path => "/usr/bin"
   }
 }
 

@@ -40,8 +40,8 @@ FORGE
     puppetlabs-java (1.6.0)
       puppetlabs-stdlib (< 5.0.0, >= 2.4.0)
     puppetlabs-limits (0.1.0)
-    puppetlabs-ntp (2.0.0)
-      puppetlabs-stdlib (>= 0.1.6)
+    puppetlabs-ntp (4.2.0)
+      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
     puppetlabs-pe_gem (0.2.0)
     puppetlabs-stdlib (4.12.0)
     richardc-datacat (0.6.2)
@@ -68,6 +68,6 @@ DEPENDENCIES
   puppetlabs-docker_platform (= 2.1.0)
   puppetlabs-java (= 1.6.0)
   puppetlabs-limits (= 0.1.0)
-  puppetlabs-ntp (= 2.0.0)
+  puppetlabs-ntp (= 4.2.0)
   puppetlabs-stdlib (= 4.12.0)
 

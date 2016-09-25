@@ -24,9 +24,8 @@ class osNode($interface = 'eth1') {
 
   ### timezone
   class {'linux::base::timezone' :
-    timezone => 'UTC',
+    timezone => 'UTC'
   }
 
-  include ntp
+  include '::ntp'
 }
-

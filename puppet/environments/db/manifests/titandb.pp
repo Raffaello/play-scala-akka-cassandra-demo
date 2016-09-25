@@ -1,6 +1,11 @@
 class titanNode {
   include defaultNode
   include noSwapNode
+  ### not enough ram, keep swap
+#  exec {'swappines':
+#    command => '/sbin/sysctl vm.swappiness=10'
+#  }
+
   include javaNode
 
   #include '::archive'
@@ -44,7 +49,7 @@ class titanNode {
     require => Exec['unpack titandb'],
     path  => "${titanInstallDir}/${titanPath}/conf/gremlin-server/gremlin-server.yaml",
     line  => "  graph: conf/${titanPropFile}",
-    match => '  graph: conf/gremlin-server/titan-berkeleyje-server.properties'
+    match => '  graph: conf/gremlin-server/titan-berkeleyje-server.properties:'
   }
 
   # improvement for later: https://docs.puppet.com/guides/augeas.html

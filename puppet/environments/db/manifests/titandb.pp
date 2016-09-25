@@ -38,19 +38,12 @@ class titanNode {
     require => Exec['titandb installer'],
     timeout => 0
   }
-  -> file { "${titanInstallDir}/${titanPath}/bin/titan.sh":
-    ensure  => 'present',
-    mode    => '0755',
-    owner   => 'vagrant',
-    group   => 'vagrant',
-    recurse => true
-  }
   -> pathmunge { "${titanInstallDir}/${titanPath}/bin": }
 
   file_line { "gremlin $titanPropFile":
     require => Exec['unpack titandb'],
     path  => "${titanInstallDir}/${titanPath}/conf/gremlin-server/gremlin-server.yaml",
-    line  => '  graph: conf/$titanPropFile}',
+    line  => "  graph: conf/${titanPropFile}",
     match => '  graph: conf/gremlin-server/titan-berkeleyje-server.properties}'
   }
 

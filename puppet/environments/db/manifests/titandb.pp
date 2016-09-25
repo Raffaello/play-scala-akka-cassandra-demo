@@ -83,11 +83,16 @@ class titanNode {
     path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
     line => "storage.cassandra.keyspace=titandb"
   }
-  -> file_line { "t-c-e,p 7":
+  -> file_line { "t-c-e.p 7":
     path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
     line => "index.search.elasticsearch.client-only=false",
     match => "index.search.elasticsearch.client-only=true"
   }
+#  -> file_line {"t-c-e.p 8":
+#    path => "${titanInstallDir}/${titanPath}/conf/$titanPropFile",
+#    line => "storage.backend=cassandra",
+#    match => "storage.backend=cassandrathrift"
+#  }
 }
 
 node /^titandb-0(\d+)$/

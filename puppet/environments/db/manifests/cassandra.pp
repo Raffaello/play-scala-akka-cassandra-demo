@@ -50,7 +50,8 @@ class cassandraNode {
     max_hints_delivery_threads => 1,
 #    hints_directory => "",
     memtable_flush_writers => 2,
-    rpc_interface => 'eth1'
+    rpc_interface => 'eth1',
+#    broadcast_address => $ipaddress_eth1
   }
   -> file {'/hints/':
     ensure => directory,

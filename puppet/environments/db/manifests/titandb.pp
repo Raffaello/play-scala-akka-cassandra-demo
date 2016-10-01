@@ -131,4 +131,17 @@ node /^titandb-0(\d+)$/
 {
   include osNode
   include titanNode
+  class { 'consulAgentNode':
+    consulServerIp => '10.10.10.10'
+  }
+  ::consul::service { 'TitanDB':
+    checks  => [
+      {
+        script   => '/bin/systemctl status gremlin-server.service',
+        interval => '30s'
+      }
+    ],
+#    port    => 6379,
+#    tags    => ['master']
+  }
 }

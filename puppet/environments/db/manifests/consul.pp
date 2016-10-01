@@ -13,3 +13,14 @@ class consulNode {
     }
   }
 }
+
+class consulAgentNode($consulServerIp) {
+  class { '::consul':
+    config_hash => {
+      'data_dir'   => '/opt/consul',
+      'log_level'  => 'INFO',
+      'node_name'  => $hostname,
+      'retry_join' => $consulServerIp
+    }
+  }
+}

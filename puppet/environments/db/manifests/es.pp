@@ -91,4 +91,8 @@ node /^es-0(\d+)$/
     #net_host   => "0.0.0.0",
     es_version => '2.4.0'
   }
+
+  class { 'consulAgentNode':
+    consulServerIp => '10.10.10.10'
+  }
 }

@@ -145,6 +145,9 @@ node /^cassandra-0(\d+)$/
 {
   include osNode
   include cassandraNode
+  class { 'consulAgentNode':
+    consulServerIp => '10.10.10.10'
+  }
 }
 
 ##-> class { 'cassandra::schema':

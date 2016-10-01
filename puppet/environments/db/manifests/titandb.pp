@@ -93,10 +93,37 @@ class titanNode {
   }
 
   # TODO: run gremlin-server.sh on boot / after provision [systemd script]
-  -> exec { 'gremlin server as daemon':
-    command => "setsid bin/gremlin-server.sh >/var/log/titandb.log 2>&1 < /dev/null &",
-    cwd => "${titanInstallDir}/${titanPath}",
-    path => "/usr/bin"
+#  -> exec { 'gremlin server as daemon':
+#    command => "setsid bin/gremlin-server.sh >/var/log/titandb.log 2>&1 < /dev/null &",
+#    cwd => "${titanInstallDir}/${titanPath}",
+#    path => "/usr/bin"
+#  }
+
+  $gremlin_server_service = '[Unit]
+Description=Gremling server for TitanDB using ES and remote Cassandra
+After=syslog.target network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/share/titan-1.0.0-hadoop1
+;PIDFile=/usr/share/titan-1.0.0-hadoop1/bin/gremlin-server.pid
+ExecStart=/usr/share/titan-1.0.0-hadoop1/bin/gremlin-server.sh
+'
+  file { '/etc/systemd/system/gremlin-server.service':
+    ensure => present,
+    mode => '0644',
+    owner => 'root',
+    group => 'root',
+    content => $gremlin_server_service
+    #source => 'puppet:///files/gremlin-server.service'
+    #source => 'file:///vagrant/puppet/environments/db/files/gremlin-server.service'
+  }
+  -> exec {'systemctl-daemon-reload':
+    command => '/bin/systemctl daemon-reload'
+  }
+  -> service { 'gremlin-server':
+      enable => true,
+      ensure => 'running'
   }
 }
 

@@ -9,18 +9,18 @@ class consulNode {
       'node_name'        => 'db.dev.consul',
       'server'           => true,
       'ui_dir'           => '/opt/consul/ui',
-      #    'bind_addr'        => "${::ipaddress_eth1}"
+      'bind_addr'        => "${::ipaddress_eth1}"
     }
   }
 }
 
-class consulAgentNode($consulServerIp) {
+class consulAgentNode($consulServerIps) {
   class { '::consul':
     config_hash => {
       'data_dir'   => '/opt/consul',
       'log_level'  => 'INFO',
       'node_name'  => $hostname,
-      'retry_join' => $consulServerIp
+      'retry_join' => $consulServerIps
     }
   }
 }

@@ -132,7 +132,7 @@ node /^titandb-0(\d+)$/
   include osNode
   include titanNode
   class { 'consulAgentNode':
-    consulServerIp => ['10.10.10.10']
+    consulServerIps => ['10.10.10.10']
   }
   ::consul::service { 'TitanDB':
     checks  => [

@@ -93,6 +93,16 @@ node /^es-0(\d+)$/
   }
 
   class { 'consulAgentNode':
-    consulServerIp => '10.10.10.10'
+    consulServerIp => ['10.10.10.10']
+  }
+  ::consul::service { 'ES':
+    checks  => [
+      {
+        script   => '/bin/systemctl status elasticsearch.service',
+        interval => '30s'
+      }
+    ],
+    port    => 9200,
+    tags    => ['gremlin-server']
   }
 }

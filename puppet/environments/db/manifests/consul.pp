@@ -20,7 +20,8 @@ class consulAgentNode($consulServerIps) {
       'data_dir'   => '/opt/consul',
       'log_level'  => 'INFO',
       'node_name'  => $hostname,
-      'retry_join' => $consulServerIps
+      'retry_join' => $consulServerIps,
+      'bind_addr'  => $ipaddress_eth1
     }
   }
 }

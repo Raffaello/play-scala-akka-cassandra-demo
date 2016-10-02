@@ -93,7 +93,7 @@ node /^es-0(\d+)$/
   }
 
   class { 'consulAgentNode':
-    consulServerIp => ['10.10.10.10']
+    consulServerIps => ['10.10.10.10']
   }
   ::consul::service { 'es':
     checks  => [

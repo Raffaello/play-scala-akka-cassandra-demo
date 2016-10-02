@@ -100,6 +100,10 @@ node /^es-0(\d+)$/
       {
         script   => '/bin/systemctl status elasticsearch.service',
         interval => '30s'
+      },
+      {
+        script => "curl $ipaddress_eth1:9200/_cat/health",
+        interval => '30s'
       }
     ],
     port    => 9200,

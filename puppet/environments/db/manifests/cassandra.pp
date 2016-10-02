@@ -148,6 +148,16 @@ node /^cassandra-0(\d+)$/
   class { 'consulAgentNode':
     consulServerIps => ['10.10.10.10']
   }
+  ::consul::service { 'cassandra':
+    checks  => [
+      {
+        script   => '/bin/systemctl status cassandra.service',
+        interval => '30s'
+      }
+    ],
+    port    => 9200,
+    tags    => ['cassandra']
+  }
 }
 
 ##-> class { 'cassandra::schema':

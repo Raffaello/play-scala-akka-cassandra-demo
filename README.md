@@ -30,14 +30,14 @@
 
 ### other IPs
 
-- cassandra titan => 10.10.30.1[1-3]
+- cassandra => 10.10.30.1[1-3]
 - TitanDB   => 10.10.40.11
 
 ## [WIP] servers architecture
 
 ### DB Environment
 
-- db-vm (management purpose) => docker, dockerSwarm, consul, gremlin-server, opsCenter 
+- db-vm (management purpose) => docker, dockerSwarm, consul
 - Cassandra cluster => general column data store
 - Elastic Search cluster => indexes
 - TitanDB Cluster => Gremlin Server remoting to Cassandra

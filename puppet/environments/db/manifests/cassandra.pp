@@ -1,7 +1,7 @@
 class cassandraNode {
   include defaultNode
   #include noSwapNode
-  ### the agents (datastax,..) make needs more memory, so swap needed
+  ### the agents (datastax,..) needs more memory, so swap needed
   exec {'swappines':
     command => '/sbin/sysctl vm.swappiness=10'
   }
@@ -112,32 +112,32 @@ class cassandraNode {
     }
   }
 
-  $jmxRemotePwContent = 'monitorRole QED
-controlRole R&D
-cassandra cassandra'
-
-  $jmxRemoteAccContent = 'monitorRole readonly
-cassandra readwrite
-controlRole readwrite \
-unregister'
+#  $jmxRemotePwContent = 'monitorRole QED
+#controlRole R&D
+#cassandra cassandra'
+#
+#  $jmxRemoteAccContent = 'monitorRole readonly
+#cassandra readwrite
+#controlRole readwrite \
+#unregister'
 
   file { $jmxRemotePw:
     path    => "$jmxPath/$jmxRemotePw",
     owner   => 'cassandra',
     group   => 'cassandra',
     ensure  => present,
-    content => $jmxRemotePwContent,
+#    content => $jmxRemotePwContent,
     mode    => '0400',
-#    source => 'puppet:///files/jmxremote.password'
+    source => 'puppet:///files/jmxremote.password'
   }
   file { $jmxRemoteAcc:
     path    => "$jmxPath/$jmxRemoteAcc",
     owner   => 'cassandra',
     group   => 'cassandra',
     ensure  => present,
-    content => $jmxRemoteAccContent,
+#    content => $jmxRemoteAccContent,
     mode    => '0400',
-#    source => 'puppet:///files/jmxremote.access'
+    source => 'puppet:///files/jmxremote.access'
   }
 }
 

@@ -94,10 +94,10 @@ node /^es-0(\d+)$/
   class { 'consulAgentNode':
     consulServerIps => ['10.10.10.10']
   }
-  ::consul::service { 'es':
+  ::consul::service { "$hostname":
     checks  => [
       {
-        script   => '/bin/systemctl status elasticsearch.service',
+        script   => "/bin/systemctl status elasticsearch-$hostname.service",
         interval => '30s'
       },
       {

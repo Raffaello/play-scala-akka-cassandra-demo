@@ -51,14 +51,14 @@ node 'web.dev' {
   class { 'consulAgentNode':
     consulServerIps => ['10.10.10.10']
   }
-#  ::consul::service { 'web-vm':
-#    checks  => [
-#      {
-#        script   => '',
-#        interval => '30s'
-#      }
-#    ],
-#    port    => 9200,
-#    tags    => ['web']
-#  }
+  ::consul::service { 'haproxy':
+    checks  => [
+      {
+        script   => 'systemctl status haproxy.service  -l',
+        interval => '30s'
+      }
+    ],
+    port    => 80,
+    tags    => ['web']
+  }
 }

@@ -1,3 +1,6 @@
+#######################################
+# !!! SHARED BETWEEN ENVIRONMENTS !!! #
+#######################################
 class javaNode {
   class { 'java':
     distribution          => 'jdk',

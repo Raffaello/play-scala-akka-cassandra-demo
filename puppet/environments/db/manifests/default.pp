@@ -46,5 +46,17 @@ node 'web.dev' {
   include defaultNode
   include osNode
   include scalaNode
-  include consulAgentNode
+  class { 'consulAgentNode':
+    consulServerIps => ['10.10.10.10']
+  }
+#  ::consul::service { 'web-vm':
+#    checks  => [
+#      {
+#        script   => '',
+#        interval => '30s'
+#      }
+#    ],
+#    port    => 9200,
+#    tags    => ['web']
+#  }
 }

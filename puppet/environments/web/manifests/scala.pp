@@ -1,17 +1,3 @@
-#include java
-#
-#java::oracle { 'jdk8' :
-#  ensure  => 'present',
-#  version => '8',
-#  java_se => 'jdk',
-#}
-
-##unzip
-#package { 'unzip':
-#  ensure => present,
-#  before => Exec['Unpack activator']
-#}
-
 #activator
 #https://downloads.typesafe.com/typesafe-activator/1.3.10/typesafe-activator-1.3.10.zip
 #activator-minimal

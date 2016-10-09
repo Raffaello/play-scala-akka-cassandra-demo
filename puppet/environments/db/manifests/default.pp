@@ -41,3 +41,10 @@ node 'db.dev' {
 #  class { '::cassandra': } ->
 #  class { '::cassandra::opscenter': }
 }
+
+node 'web.dev' {
+  include defaultNode
+  include osNode
+  include scalaNode
+  include consulNode
+}

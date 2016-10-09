@@ -46,6 +46,8 @@ node 'web.dev' {
   include defaultNode
   include osNode
   include scalaNode
+  include haproxyNode
+
   class { 'consulAgentNode':
     consulServerIps => ['10.10.10.10']
   }

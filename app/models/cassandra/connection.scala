@@ -15,8 +15,8 @@ object Defaults {
   val Connector = ContactPoints(hosts, port)
       .withClusterBuilder(
         _.withCredentials(
-          config.getString("cassandra.username"),
-          config.getString("cassandra.password")
+          cassandraConfig.getString("username"),
+          cassandraConfig.getString("password")
         )
         .withSocketOptions(new SocketOptions().setConnectTimeoutMillis(10000))
       ).keySpace(keyspace)

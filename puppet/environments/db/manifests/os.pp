@@ -1,3 +1,6 @@
+#######################################
+# !!! SHARED BETWEEN ENVIRONMENTS !!! #
+#######################################
 class osNode($interface = 'eth1') {
   ### MOTD
   $motdTemplateErb ="

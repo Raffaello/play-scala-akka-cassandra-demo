@@ -1,3 +1,6 @@
+#######################################
+# !!! SHARED BETWEEN ENVIRONMENTS !!! #
+#######################################
 class consulNode {
   class { '::consul':
     config_hash => {

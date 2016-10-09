@@ -9,4 +9,5 @@ mod 'panaman-pathmunge',            "1.0.0"
 mod 'mtulio-linux',                 "1.1.1"
 mod 'puppetlabs-haproxy',           "1.5.0"
 mod 'puppet-nodejs',                "2.0.1"
+mod 'puppetlabs-ntp',               "4.2.0"
 

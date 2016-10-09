@@ -92,23 +92,23 @@ class titanNode {
     match => "storage.backend=cassandrathrift"
   }
 
-#  $gremlin_server_service = '[Unit]
-#Description=Gremling server for TitanDB using ES and remote Cassandra
-#After=syslog.target network.target
-#
-#[Service]
-#Type=simple
-#WorkingDirectory=/usr/share/titan-1.0.0-hadoop1
-#;PIDFile=/usr/share/titan-1.0.0-hadoop1/bin/gremlin-server.pid
-#ExecStart=/usr/share/titan-1.0.0-hadoop1/bin/gremlin-server.sh
-#'
+  $gremlin_server_service = '[Unit]
+Description=Gremling server for TitanDB using ES and remote Cassandra
+After=syslog.target network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/share/titan-1.0.0-hadoop1
+;PIDFile=/usr/share/titan-1.0.0-hadoop1/bin/gremlin-server.pid
+ExecStart=/usr/share/titan-1.0.0-hadoop1/bin/gremlin-server.sh
+'
   file { '/etc/systemd/system/gremlin-server.service':
     ensure => present,
     mode => '0644',
     owner => 'root',
     group => 'root',
-#    content => $gremlin_server_service
-    source => 'puppet:///files/gremlin-server.service'
+    content => $gremlin_server_service
+#    source => 'puppet:///files/gremlin-server.service'
   }
   -> exec {'systemctl-daemon-reload':
     command => '/bin/systemctl daemon-reload'

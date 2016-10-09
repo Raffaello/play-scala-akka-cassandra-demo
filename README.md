@@ -27,6 +27,7 @@
 - OpsCenter => 10.10.10.10:8888
 - scala app => 10.10.1.10:80    or 127.0.0.1:8080
 - ES        => 10.10.20.1[1|2]:9200/_plugin/kopf/
+- HAProxy   => 10.10.1.10/haproxy?stats
 
 ### other IPs
 

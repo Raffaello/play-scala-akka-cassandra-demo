@@ -1,6 +1,9 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
+    KyleAnderson-consul (1.1.0)
+      puppet-archive (< 2.0.0, >= 1.0.0)
+      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
     garethr-docker (5.2.0)
       puppetlabs-apt (<= 3.0.0, >= 1.8.0)
       puppetlabs-stdlib (>= 4.1.0)
@@ -33,6 +36,7 @@ FORGE
     treydock-gpg_key (0.0.3)
 
 DEPENDENCIES
+  KyleAnderson-consul (= 1.1.0)
   mtulio-linux (= 1.1.1)
   panaman-pathmunge (= 1.0.0)
   puppet-archive (= 1.0.0)

@@ -2,7 +2,7 @@ class haproxyNode {
   class { 'haproxy':
     service_ensure => true,
     global_options => {
-      'log' => '127.0.0.1',
+      'log' => '127.0.0.1 local0',
       'maxconn' => 10
     },
 #    defaults_options => {
@@ -51,6 +51,7 @@ class haproxyNode {
 
   haproxy::backend { 'play_webserver':
     collect_exported => false,
+    mode => 'http',
     options => {
       'option'  => [
         'httplog'

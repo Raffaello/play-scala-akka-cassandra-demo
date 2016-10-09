@@ -46,5 +46,5 @@ node 'web.dev' {
   include defaultNode
   include osNode
   include scalaNode
-  include consulNode
+  include consulAgentNode
 }

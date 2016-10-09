@@ -1,5 +1,7 @@
+#######################################
+# !!! SHARED BETWEEN ENVIRONMENTS !!! #
+#######################################
 class defaultNode {
-
   package { 'unzip':
     ensure => present
   }
@@ -8,6 +10,9 @@ class defaultNode {
     ensure => present
   }
   -> package { 'htop':
+    ensure => present
+  }
+  -> package { 'vim':
     ensure => present
   }
 }

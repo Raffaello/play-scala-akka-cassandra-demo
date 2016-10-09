@@ -46,19 +46,24 @@
 ### web-vm
 
 - HAProxy
+- 2 scala Play! instances load balanced running
+
+It would be a sort of production testing environment
 
 ### db-vm
 
+It manages the resources of the DB layer architecture, it is a monitor DB instance.
+
 ### cassandra
 
+The main DB, a cluster of cassandra, reduced to 1 istance only due to HW resources.
 
 ### titandb
 
+1 istance running gremlin server and connect to Cassandra and Elastic search.
+
 ### es
 
-
---------------------------
-
---------------------------
+Indexes for TitanDB.
 
 --------------------------

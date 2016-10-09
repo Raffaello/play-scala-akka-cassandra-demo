@@ -13,8 +13,13 @@ object Defaults {
   val keyspace = cassandraConfig.getString("keyspace")
 
   val Connector = ContactPoints(hosts, port)
-      .withClusterBuilder(_.withSocketOptions(new SocketOptions().setConnectTimeoutMillis(10000)))
-      .keySpace(keyspace)
+      .withClusterBuilder(
+        _.withCredentials(
+          config.getString("cassandra.username"),
+          config.getString("cassandra.password")
+        )
+        .withSocketOptions(new SocketOptions().setConnectTimeoutMillis(10000))
+      ).keySpace(keyspace)
 }
 
 class AppDatabase(val keyspace: KeySpaceDef) extends Database(keyspace)

@@ -48,8 +48,8 @@ class titanNode {
   file_line { "gremlin $titanPropFile":
     require => Exec['unpack titandb'],
     path  => "${titanInstallDir}/${titanPath}/conf/gremlin-server/gremlin-server.yaml",
-    line  => "  graph: conf/${titanPropFile}",
-    match => '  graph: conf/gremlin-server/titan-berkeleyje-server.properties:'
+    line  => "graph: conf/${titanPropFile}}",
+    match => 'graph: conf/gremlin-server/titan-berkeleyje-server.properties}'
   }
 
   # improvement for later: https://docs.puppet.com/guides/augeas.html

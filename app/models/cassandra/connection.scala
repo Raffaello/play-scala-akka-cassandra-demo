@@ -3,32 +3,34 @@ package models.cassandra
 import com.datastax.driver.core.SocketOptions
 import com.typesafe.config.ConfigFactory
 import com.websudos.phantom.dsl._
+import io.surfkit.gremlin.GremlinClient
+
 import scala.collection.JavaConversions._
 
+object Defaults
+{
+  private val _cassandraConfig = ConfigFactory.load.getConfig("cassandra")
+  val port = _cassandraConfig.getInt("port")
+  val hosts = _cassandraConfig.getStringList("hosts")
+  val keyspace = _cassandraConfig.getString("keyspace")
 
-object Defaults {
-  private val cassandraConfig = ConfigFactory.load.getConfig("cassandra")
-  val port = cassandraConfig.getInt("port")
-  val hosts = cassandraConfig.getStringList("hosts")
-  val keyspace = cassandraConfig.getString("keyspace")
-
-  val Connector = ContactPoints(hosts, port)
+  val cassandraConfig = ContactPoints(hosts, port)
       .withClusterBuilder(
         _.withCredentials(
-          cassandraConfig.getString("username"),
-          cassandraConfig.getString("password")
+          _cassandraConfig.getString("username"),
+          _cassandraConfig.getString("password")
         )
         .withSocketOptions(new SocketOptions().setConnectTimeoutMillis(10000))
       ).keySpace(keyspace)
 }
 
-class AppDatabase(val keyspace: KeySpaceDef) extends Database(keyspace)
+class CassandraDatabase(val keyspace: KeySpaceDef) extends Database(keyspace)
 {
 
 }
 
-object AppDatabase extends AppDatabase(Defaults.Connector)
+object CassandraDatabase extends CassandraDatabase(Defaults.cassandraConfig)
 
-//trait AppDatabaseProvider extends DatabaseProvider {
-//  override val database: AppDatabase = AppDatabase
+//trait AppDatabaseProvider {
+//  val database: CassandraDatabase = CassandraDatabase
 //}

@@ -1,6 +1,8 @@
 package controllers
 
 import javax.inject._
+
+import models.gremlin.GremlinServer
 import play.api._
 import play.api.mvc._
 
@@ -21,4 +23,7 @@ class HomeController @Inject() extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
 
+  def conn = Action {
+    Ok(GremlinServer.client.toString)
+  }
 }

@@ -1,7 +1,7 @@
 # [WIP] Scala Play! and Akka with Cassandra and Titan
 
 - scala
-- play (lagom) framework 
+- play framework 
 - akka
 - cassandra DB
 - Titan DB
@@ -22,11 +22,11 @@
 
 ## Browser sites
 
-- Docker UI => 10.10.10.10:9000 or 127.0.0.1:9000
+- Docker UI => 10.10.10.10:9000 or 127.0.0.1:9000 (disabled, code commented out)
 - Consul UI => 10.10.10.10:8500 or 127.0.0.1:8500
-- OpsCenter => 10.10.10.10:8888
-- scala app => 10.10.1.10:80    or 127.0.0.1:8080
-- ES        => 10.10.20.1[1|2]:9200/_plugin/kopf/
+- OpsCenter => 10.10.10.10:8888 (disabled, code commented out)
+- scala app => 10.10.1.10:80    or 127.0.0.1:8080 (WIP)
+- ES        => 10.10.20.1[1|2]:9200/_plugin/kopf/  (reduced to one instance only .11)
 - HAProxy   => 10.10.1.10/haproxy?stats
 
 ### other IPs
@@ -48,21 +48,20 @@
 - HAProxy
 - 2 scala Play! instances load balanced running
 
-It would be a sort of production testing environment
 
 ### db-vm
 
-It manages the resources of the DB layer architecture, it is a monitor DB instance.
+It manages the resources of the DB layer architecture, it is a monitor for the DB-tier instances.
 
-### cassandra
+### Cassandra
 
-The main DB, a cluster of cassandra, reduced to 1 istance only due to HW resources.
+The main DB, a cluster of cassandra, reduced to 1 istance only due to limited HW resources.
 
-### titandb
+### Titandb
 
 1 istance running gremlin server and connect to Cassandra and Elastic search.
 
-### es
+### Elastic Search
 
 Indexes for TitanDB.
 

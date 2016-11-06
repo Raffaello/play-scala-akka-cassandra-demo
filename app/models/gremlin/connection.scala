@@ -3,7 +3,6 @@ package models.gremlin
 import com.typesafe.config.ConfigFactory
 import io.surfkit.gremlin.GremlinClient
 
-
 object Defaults
 {
   private val _gremlinConfig = ConfigFactory.load.getConfig("gremlin")

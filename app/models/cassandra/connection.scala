@@ -3,7 +3,6 @@ package models.cassandra
 import com.datastax.driver.core.SocketOptions
 import com.typesafe.config.ConfigFactory
 import com.websudos.phantom.dsl._
-import io.surfkit.gremlin.GremlinClient
 
 import scala.collection.JavaConversions._
 

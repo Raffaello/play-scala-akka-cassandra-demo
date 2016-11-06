@@ -31,6 +31,6 @@ class CassandraDatabase(val keyspace: KeySpaceDef) extends Database(keyspace)
 
 object CassandraDatabase extends CassandraDatabase(Defaults.cassandraConfig)
 
-//trait AppDatabaseProvider {
-//  val database: CassandraDatabase = CassandraDatabase
-//}
+trait CassandraDatabaseProvider {
+  val database: CassandraDatabase = CassandraDatabase
+}

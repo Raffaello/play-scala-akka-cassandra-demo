@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
 //  "com.datastax.cassandra"  % "cassandra-driver-core" % "2.0.2",
 //  "com.datastax.cassandra" %% "dse-driver" % "1.1.0",
   "io.surfkit" %% "reactive-gremlin" % "0.0.1",
+//  "org.tinymediamanager.plugins" % "scraper-imdb" % "1.7",
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
 )
 

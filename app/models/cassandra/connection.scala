@@ -3,7 +3,6 @@ package models.cassandra
 import com.datastax.driver.core.SocketOptions
 import com.typesafe.config.ConfigFactory
 import com.websudos.phantom.dsl._
-
 import scala.collection.JavaConversions._
 
 object Defaults
@@ -25,7 +24,6 @@ object Defaults
 
 class CassandraDatabase(val keyspace: KeySpaceDef) extends Database(keyspace)
 {
-
 }
 
 object CassandraDatabase extends CassandraDatabase(Defaults.cassandraConfig)

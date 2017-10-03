@@ -1,10 +1,10 @@
 # [WIP] Scala Play! and Akka with Cassandra and Titan
 
 - scala
-- play framework (move to lagom)
+- play framework ===> move to lagom
 - akka
 - cassandra DB
-- Titan DB
+- Titan DB ===> [JanushGrap] (http://janusgraph.org/)
 
 - [Dataset](https://archive.ics.uci.edu/ml/datasets/Movie)
 

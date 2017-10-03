@@ -1,10 +1,12 @@
 # [WIP] Scala Play! and Akka with Cassandra and Titan
 
 - scala
-- play framework 
+- play framework (move to lagom)
 - akka
 - cassandra DB
 - Titan DB
+
+- [Dataset](https://archive.ics.uci.edu/ml/datasets/Movie)
 
 ## [WIP] configuration using vagrant and puppet
 
